@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   Sparkles,
   Bot,
@@ -26,6 +27,7 @@ const QUICK_PROMPTS = [
 ];
 
 export default function PakAiAssistant() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +36,11 @@ export default function PakAiAssistant() {
   const { openDeliveryModal } = useCart();
   const modalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Isolate Data App / Dashboard completely from public customer portal
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   // Close on ESC key (modern web accessibility)
   useEffect(() => {

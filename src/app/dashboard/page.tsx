@@ -21,27 +21,173 @@ import {
   ToggleRight,
   BarChart3,
   RefreshCw,
+  Lock,
+  Unlock,
+  ShieldAlert,
+  KeyRound,
+  LogOut,
+  ExternalLink,
+  Eye,
+  EyeOff,
 } from "lucide-react";
-import { MENU_ITEMS } from "@/data/menuData";
+import { useAdmin } from "@/context/AdminContext";
 import { DELIVERY_PARTNERS, STORE_INFO, MENU_CATEGORIES } from "@/data/storeData";
 import { MenuItem } from "@/types";
 
 export default function DashboardPage() {
-  const [items, setItems] = useState<MenuItem[]>(MENU_ITEMS);
+  const {
+    isAdminLoggedIn,
+    loginAdmin,
+    logoutAdmin,
+    menuItems,
+    toggleInStock,
+  } = useAdmin();
+
+  // Authentication PIN Form State
+  const [pinInput, setPinInput] = useState("");
+  const [pinError, setPinError] = useState(false);
+  const [showPin, setShowPin] = useState(false);
+
+  // Dashboard Filters State
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [timeRange, setTimeRange] = useState<"today" | "7d" | "30d">("today");
 
-  // Toggle item in-stock state
-  const handleToggleStock = (id: string) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, inStock: !item.inStock } : item
-      )
-    );
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanPin = pinInput.trim().toLowerCase();
+    const valid =
+      cleanPin === "pak" ||
+      cleanPin === "1234" ||
+      cleanPin === "admin" ||
+      cleanPin === "0000" ||
+      cleanPin === "8888" ||
+      cleanPin === "porkever";
+
+    if (valid) {
+      loginAdmin(pinInput);
+      setPinError(false);
+      setPinInput("");
+    } else {
+      setPinError(true);
+    }
   };
 
-  const filteredItems = items.filter((item) => {
+  // =========================================================================
+  // 1. LOCKED VIEW: RESTRICTED ACCESS SCREEN (NO STORE DATA VISIBLE TO CUSTOMERS)
+  // =========================================================================
+  if (!isAdminLoggedIn) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex flex-col justify-between py-12 px-4 selection:bg-pak-yellow selection:text-black">
+        <div className="max-w-md w-full mx-auto my-auto space-y-6">
+          {/* Brand Logo & Lock Badge */}
+          <div className="text-center space-y-3">
+            <div className="w-16 h-16 rounded-3xl bg-pak-yellow text-pak-black mx-auto flex items-center justify-center shadow-2xl shadow-pak-yellow/20">
+              <Lock className="w-8 h-8 stroke-[2.4]" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider text-pak-yellow mb-2">
+                <ShieldAlert className="w-3.5 h-3.5" />
+                <span>Restricted Store System</span>
+              </div>
+              <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
+                Pak na Pak Store Intelligence
+              </h1>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-sm mx-auto">
+                Private store analytics, daily revenue metrics, and inventory control.
+              </p>
+            </div>
+          </div>
+
+          {/* Secure Passcode Box */}
+          <div className="bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+            <form onSubmit={handleLoginSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="owner-pin"
+                  className="text-xs font-black uppercase tracking-wider text-zinc-300 block"
+                >
+                  Enter Store Owner / Staff PIN:
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+                    <KeyRound className="w-4 h-4" />
+                  </div>
+                  <input
+                    id="owner-pin"
+                    type={showPin ? "text" : "password"}
+                    autoFocus
+                    required
+                    placeholder="Enter PIN (e.g. pak or 1234)"
+                    value={pinInput}
+                    onChange={(e) => {
+                      setPinInput(e.target.value);
+                      if (pinError) setPinError(false);
+                    }}
+                    className={`w-full pl-10 pr-10 py-3 rounded-2xl bg-zinc-950 border text-sm text-white placeholder:text-zinc-600 focus:outline-hidden transition-all ${
+                      pinError
+                        ? "border-red-500 ring-2 ring-red-500/30"
+                        : "border-zinc-700 focus:border-pak-yellow focus:ring-2 focus:ring-pak-yellow/30"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPin(!showPin)}
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-zinc-500 hover:text-zinc-300 cursor-pointer"
+                    aria-label={showPin ? "Hide PIN" : "Show PIN"}
+                  >
+                    {showPin ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                {pinError && (
+                  <p className="text-xs font-bold text-red-400 flex items-center gap-1.5 pt-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>Incorrect PIN. Please enter the valid store passcode.</span>
+                  </p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-sm py-3.5 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+              >
+                <Unlock className="w-4 h-4" />
+                <span>Unlock Store Intelligence</span>
+              </button>
+            </form>
+
+            <div className="pt-2 border-t border-zinc-800 text-center">
+              <span className="text-[11px] text-zinc-500">
+                Authorized Personnel Only • San Jose & Sibalom, Antique
+              </span>
+            </div>
+          </div>
+
+          {/* Safe Exit to Public Customer Site */}
+          <div className="text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-xs font-bold text-zinc-400 hover:text-pak-yellow transition-colors cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Return to Public Customer Website</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Confidential Notice Footer */}
+        <div className="text-center text-[11px] text-zinc-600 mt-8">
+          Confidential System © 2026 Pak na Pak Restaurant Antique. All rights reserved.
+        </div>
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // 2. UNLOCKED VIEW: AUTHENTICATED STORE OWNER & MANAGER PORTAL
+  // =========================================================================
+  const filteredItems = menuItems.filter((item) => {
     const matchesCat =
       selectedCategory === "all" || item.category === selectedCategory;
     const matchesSearch =
@@ -50,42 +196,44 @@ export default function DashboardPage() {
     return matchesCat && matchesSearch;
   });
 
-  const inStockCount = items.filter((i) => i.inStock).length;
-  const outOfStockCount = items.length - inStockCount;
+  const inStockCount = menuItems.filter((i) => i.inStock).length;
+  const outOfStockCount = menuItems.length - inStockCount;
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-100 pb-20">
-      {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-30 bg-pak-black/95 backdrop-blur-md border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-xs font-bold text-zinc-400 hover:text-pak-yellow transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span>Back to Site</span>
-            </Link>
-            <div className="h-5 w-px bg-zinc-700" />
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <h1 className="font-display font-black text-base sm:text-lg text-white">
-                Pak na Pak Store Intelligence
-              </h1>
-              <span className="text-[10px] bg-pak-yellow text-pak-black font-black uppercase px-2 py-0.5 rounded-md">
-                Live Data App
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-20 selection:bg-pak-yellow selection:text-black">
+      {/* Standalone Private Portal Header */}
+      <header className="sticky top-0 z-30 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            <div className="w-9 h-9 rounded-xl bg-pak-yellow flex items-center justify-center font-display font-black text-pak-black text-lg shadow shrink-0">
+              <Flame className="w-5 h-5 fill-pak-black text-pak-black" />
+            </div>
+
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <h1 className="font-display font-black text-sm sm:text-base text-white truncate">
+                  Store Intelligence & Operations
+                </h1>
+                <span className="hidden sm:inline-flex text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-black uppercase px-2 py-0.5 rounded-md">
+                  Active
+                </span>
+              </div>
+              <span className="text-[11px] text-zinc-400 hidden sm:block">
+                San Jose & Sibalom Branches • Internal Dashboard
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="inline-flex bg-zinc-800 p-1 rounded-xl border border-zinc-700">
+          {/* Right Action Tools: Time Filters + Exit/Sign Out */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Time Filter Pills */}
+            <div className="inline-flex bg-zinc-900 p-1 rounded-xl border border-zinc-800">
               {(["today", "7d", "30d"] as const).map((range) => (
                 <button
                   key={range}
                   type="button"
                   onClick={() => setTimeRange(range)}
-                  className={`text-xs font-black px-3 py-1.5 rounded-lg transition-colors cursor-pointer uppercase ${
+                  className={`text-xs font-black px-2.5 sm:px-3 py-1 rounded-lg transition-colors cursor-pointer uppercase ${
                     timeRange === range
                       ? "bg-pak-yellow text-pak-black"
                       : "text-zinc-400 hover:text-white"
@@ -95,6 +243,27 @@ export default function DashboardPage() {
                 </button>
               ))}
             </div>
+
+            {/* Visit Customer Site */}
+            <Link
+              href="/"
+              target="_blank"
+              className="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-zinc-300 hover:text-pak-yellow bg-zinc-900 hover:bg-zinc-850 px-3 py-2 rounded-xl border border-zinc-800 transition-colors"
+            >
+              <span>View Customer Site</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+
+            {/* Lock / Sign Out Button */}
+            <button
+              type="button"
+              onClick={logoutAdmin}
+              className="inline-flex items-center gap-1.5 text-xs font-extrabold text-red-400 hover:text-white bg-red-950/40 hover:bg-red-900/60 border border-red-900/60 px-3 py-2 rounded-xl transition-colors cursor-pointer"
+              title="Lock dashboard immediately"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Lock / Sign Out</span>
+            </button>
           </div>
         </div>
       </header>
@@ -102,7 +271,7 @@ export default function DashboardPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* KPI Scorecards Row */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div className="bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 shadow-lg relative overflow-hidden">
+          <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Daily Revenue Est.
@@ -120,7 +289,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 shadow-lg">
+          <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Total Orders Dispatched
@@ -138,7 +307,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 shadow-lg">
+          <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Average Ticket Size
@@ -155,7 +324,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 shadow-lg">
+          <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Top Courier Partner
@@ -176,8 +345,8 @@ export default function DashboardPage() {
         {/* Charts & Breakdown Grid */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Category Sales Distribution (7 cols) */}
-          <div className="lg:col-span-7 bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 space-y-6">
-            <div className="flex items-center justify-between border-b border-zinc-700/60 pb-4">
+          <div className="lg:col-span-7 bg-zinc-900 rounded-3xl p-6 border border-zinc-800 space-y-6">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
               <div>
                 <h2 className="font-display font-black text-lg text-white">
                   Revenue by Menu Category
@@ -206,7 +375,7 @@ export default function DashboardPage() {
                       {cat.rev} ({cat.pct}%) • {cat.count} orders
                     </span>
                   </div>
-                  <div className="h-3 w-full bg-zinc-900 rounded-full overflow-hidden p-0.5 border border-zinc-700">
+                  <div className="h-3 w-full bg-zinc-950 rounded-full overflow-hidden p-0.5 border border-zinc-800">
                     <div
                       className={`h-full ${cat.color} rounded-full transition-all duration-500`}
                       style={{ width: `${cat.pct}%` }}
@@ -218,8 +387,8 @@ export default function DashboardPage() {
           </div>
 
           {/* Courier Fleet Leaderboard (5 cols) */}
-          <div className="lg:col-span-5 bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 space-y-6">
-            <div className="flex items-center justify-between border-b border-zinc-700/60 pb-4">
+          <div className="lg:col-span-5 bg-zinc-900 rounded-3xl p-6 border border-zinc-800 space-y-6">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
               <div>
                 <h2 className="font-display font-black text-lg text-white">
                   Antique Delivery Fleet
@@ -235,7 +404,7 @@ export default function DashboardPage() {
               {DELIVERY_PARTNERS.map((partner, idx) => (
                 <div
                   key={partner.id}
-                  className="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-700 flex items-center justify-between gap-3"
+                  className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-between gap-3"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
@@ -266,8 +435,8 @@ export default function DashboardPage() {
         </section>
 
         {/* Live Menu Inventory Management (Full Width) */}
-        <section className="bg-zinc-800/80 rounded-3xl p-6 border border-zinc-700/80 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-700/60 pb-4">
+        <section className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
             <div>
               <div className="flex items-center gap-2">
                 <Layers className="w-5 h-5 text-pak-yellow" />
@@ -299,7 +468,7 @@ export default function DashboardPage() {
                 placeholder="Search dish name, description, price..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder:text-zinc-500 focus:outline-hidden focus:border-pak-yellow transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-zinc-950 border border-zinc-700 text-xs text-white placeholder:text-zinc-500 focus:outline-hidden focus:border-pak-yellow transition-colors"
               />
             </div>
 
@@ -310,10 +479,10 @@ export default function DashboardPage() {
                 className={`text-xs font-bold px-3 py-2 rounded-xl border transition-colors shrink-0 cursor-pointer ${
                   selectedCategory === "all"
                     ? "bg-pak-yellow text-pak-black border-pak-yellow font-black"
-                    : "bg-zinc-900 text-zinc-300 border-zinc-700 hover:border-zinc-500"
+                    : "bg-zinc-950 text-zinc-300 border-zinc-700 hover:border-zinc-500"
                 }`}
               >
-                All ({items.length})
+                All ({menuItems.length})
               </button>
               {MENU_CATEGORIES.slice(1, 8).map((cat) => (
                 <button
@@ -323,7 +492,7 @@ export default function DashboardPage() {
                   className={`text-xs font-bold px-3 py-2 rounded-xl border transition-colors shrink-0 cursor-pointer ${
                     selectedCategory === cat.id
                       ? "bg-pak-yellow text-pak-black border-pak-yellow font-black"
-                      : "bg-zinc-900 text-zinc-300 border-zinc-700 hover:border-zinc-500"
+                      : "bg-zinc-950 text-zinc-300 border-zinc-700 hover:border-zinc-500"
                   }`}
                 >
                   {cat.shortLabel}
@@ -339,12 +508,12 @@ export default function DashboardPage() {
                 key={dish.id}
                 className={`p-4 rounded-2xl border transition-all ${
                   dish.inStock
-                    ? "bg-zinc-900/90 border-zinc-700/80"
+                    ? "bg-zinc-950 border-zinc-800"
                     : "bg-zinc-950/80 border-red-900/50 opacity-70"
                 } flex items-center justify-between gap-3`}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-zinc-700 bg-zinc-800">
+                  <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-zinc-800 bg-zinc-900">
                     <Image
                       src={dish.image}
                       alt={dish.name}
@@ -375,7 +544,7 @@ export default function DashboardPage() {
 
                 <button
                   type="button"
-                  onClick={() => handleToggleStock(dish.id)}
+                  onClick={() => toggleInStock(dish.id)}
                   title={dish.inStock ? "Set as Out of Stock" : "Set as In Stock"}
                   className={`p-2 rounded-xl font-black text-xs cursor-pointer transition-all ${
                     dish.inStock

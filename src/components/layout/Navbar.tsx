@@ -32,6 +32,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Isolate Data App / Dashboard completely from public customer portal
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
+
   const navLinks = [
     { label: "Menu", href: "/#menu" },
     { label: "Best Sellers", href: "/#bestsellers" },

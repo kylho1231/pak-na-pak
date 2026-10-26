@@ -2,12 +2,19 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Utensils, MessageCircle, ShoppingBag, Phone, Bike } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
 
 export default function StickyMobileBar() {
+  const pathname = usePathname();
   const { cartCount, cartTotal, setIsCartOpen, openDeliveryModal } = useCart();
+
+  // Isolate Data App / Dashboard completely from public customer portal
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   return (
     <aside aria-label="Mobile quick actions" className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-pak-black/95 backdrop-blur-lg border-t border-zinc-800 px-3 py-2 pb-safe">
