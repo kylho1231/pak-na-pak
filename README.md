@@ -6,7 +6,8 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16%20(Turbopack)-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Vercel Ready](https://img.shields.io/badge/Vercel-Deploy_Ready-black?style=flat&logo=vercel)](https://vercel.com/)
+[![Vercel Live](https://img.shields.io/badge/Vercel-Live_Production-success?style=flat&logo=vercel)](https://pak-na-pak.vercel.app)
+[![Live URL](https://img.shields.io/badge/Website-pak--na--pak.vercel.app-FFC700?style=flat&labelColor=111111)](https://pak-na-pak.vercel.app)
 [![Location](https://img.shields.io/badge/Location-San_Jose,_Antique-FFC700?style=flat&labelColor=111111)](https://www.google.com/maps)
 
 ---
