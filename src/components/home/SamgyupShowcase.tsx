@@ -15,8 +15,30 @@ import {
 import { SAMGYUP_SETS, STORE_INFO } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
 
+const SAMGYUP_PHOTOS = [
+  {
+    src: "/dishes/samgyup-feast-grill.jpg",
+    title: "Sizzling Grill & Melted Cheese Cup",
+    caption: "Melted cheese in the center, juicy pork slices, and banchan side dishes",
+    tag: "Sizzling Grill Feast",
+  },
+  {
+    src: "/dishes/samgyup-lettuce-wrap.jpg",
+    title: "Fresh Lettuce Ssam Wrap",
+    caption: "Grilled pork belly dipped in gooey cheese and wrapped in crisp lettuce",
+    tag: "Fresh Korean Ssam",
+  },
+  {
+    src: "/dishes/samgyup-table-spread.jpg",
+    title: "Full Table Spread with Jinro Soju",
+    caption: "Dine-in feast with marinated pork, 8 side dishes, rice bowls, and cold Soju",
+    tag: "Table Setup & Drinks",
+  },
+];
+
 export default function SamgyupShowcase() {
   const [selectedSetIndex, setSelectedSetIndex] = useState(1); // Set B default
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const { openScanModal, addToCart } = useCart();
 
   const currentSet = SAMGYUP_SETS[selectedSetIndex];
@@ -165,23 +187,72 @@ export default function SamgyupShowcase() {
           </div>
 
           {/* Right Column: Visual Grill & Table Action (5 cols) */}
-          <div className="lg:col-span-5 bg-zinc-900 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-6 border border-zinc-700">
-              <Image
-                src="/dishes/samgyupsal-wrap.jpg"
-                alt="Pak na Pak Samgyupsal Fresh Wrap"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 400px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
-                <span className="bg-pak-yellow text-pak-black font-extrabold px-2.5 py-1 rounded-md">
-                  Fresh Meats & Kimchi
-                </span>
-                <span className="bg-black/80 text-white font-bold px-2 py-1 rounded-md">
-                  Dine-In Antique
-                </span>
+          <div className="lg:col-span-5 bg-zinc-950 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+            <div>
+              {/* Main Photo Display */}
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3 border border-zinc-700 bg-black">
+                <Image
+                  src={SAMGYUP_PHOTOS[activePhotoIdx].src}
+                  alt={SAMGYUP_PHOTOS[activePhotoIdx].title}
+                  fill
+                  className="object-cover transition-opacity duration-300"
+                  sizes="(max-width: 1024px) 100vw, 450px"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+                
+                {/* 100% Real Photo Badge */}
+                <div className="absolute top-3 left-3">
+                  <span className="bg-pak-yellow text-pak-black font-black text-[10px] sm:text-xs px-2.5 py-1 rounded-md shadow flex items-center gap-1.5 uppercase tracking-wide">
+                    <Sparkles className="w-3.5 h-3.5 fill-pak-black" />
+                    Authentic Store Photo
+                  </span>
+                </div>
+
+                <div className="absolute top-3 right-3">
+                  <span className="bg-black/75 backdrop-blur text-zinc-200 text-[10px] font-bold px-2 py-1 rounded-md border border-zinc-700">
+                    San Jose, Antique
+                  </span>
+                </div>
+
+                <div className="absolute bottom-3 left-3 right-3 text-xs">
+                  <span className="inline-block text-[10px] uppercase font-black tracking-wider text-pak-yellow mb-0.5">
+                    {SAMGYUP_PHOTOS[activePhotoIdx].tag}
+                  </span>
+                  <p className="font-display font-black text-white text-sm sm:text-base leading-tight">
+                    {SAMGYUP_PHOTOS[activePhotoIdx].title}
+                  </p>
+                  <p className="text-[11px] text-zinc-300 line-clamp-1 mt-0.5">
+                    {SAMGYUP_PHOTOS[activePhotoIdx].caption}
+                  </p>
+                </div>
+              </div>
+
+              {/* 3 Authentic Photo Thumbnails */}
+              <div className="grid grid-cols-3 gap-2 mb-6">
+                {SAMGYUP_PHOTOS.map((photo, i) => (
+                  <button
+                    key={photo.src}
+                    type="button"
+                    onClick={() => setActivePhotoIdx(i)}
+                    className={`relative aspect-[4/3] rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
+                      activePhotoIdx === i
+                        ? "border-pak-yellow ring-2 ring-pak-yellow/40 scale-[1.02]"
+                        : "border-zinc-800 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.title}
+                      fill
+                      className="object-cover"
+                      sizes="140px"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-black/70 px-1 py-0.5 text-[9px] text-center text-zinc-300 font-bold truncate">
+                      {photo.tag}
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 

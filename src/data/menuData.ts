@@ -294,7 +294,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "/dishes/samgyupsal-wrap.jpg",
+    image: "/dishes/samgyup-table-spread.jpg",
   },
   {
     id: "samgyup-set-b",
@@ -307,7 +307,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "/dishes/samgyupsal-wrap.jpg",
+    image: "/dishes/samgyup-feast-grill.jpg",
   },
   {
     id: "samgyup-set-c",
@@ -319,7 +319,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "/dishes/samgyupsal-wrap.jpg",
+    image: "/dishes/samgyup-feast-grill.jpg",
   },
   {
     id: "samgyup-addon-lettuce",
@@ -329,7 +329,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Fresh, chilled crisp green lettuce leaves for your Korean meat wraps.",
     inStock: true,
     portion: "1 Basket",
-    image: "/dishes/samgyupsal-wrap.jpg",
+    image: "/dishes/samgyup-lettuce-wrap.jpg",
   },
   {
     id: "samgyup-addon-cheese-dip",
@@ -339,7 +339,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Warm, rich stretchy cheese dip (choice of Cheddar or Chili Cheese).",
     inStock: true,
     portion: "1 Cup",
-    image: "/dishes/full-pak-meal-spaghetti.jpg",
+    image: "/dishes/samgyup-lettuce-wrap.jpg",
   },
   {
     id: "samgyup-addon-cheesy-corn",
@@ -349,7 +349,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Sweet golden corn kernels baked in gooey melted cheese and butter.",
     inStock: true,
     portion: "1 Dish",
-    image: "/dishes/pork-pepper-rice.jpg",
+    image: "/dishes/samgyup-table-spread.jpg",
   },
 
   // TAKE-OUT BUNDLES

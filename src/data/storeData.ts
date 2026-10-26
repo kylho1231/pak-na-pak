@@ -235,6 +235,7 @@ export const SAMGYUP_SETS: SamgyupSetDetail[] = [
     timeLimit: "2 Hours",
     tagline: "Essential Korean BBQ experience for meat lovers",
     highlightBadge: "Sulit Starter",
+    image: "/dishes/samgyup-table-spread.jpg",
     unlimitedItems: [
       "Unlimited White Rice",
       "Unlimited Side Dishes (4 Varieties)",
@@ -257,6 +258,7 @@ export const SAMGYUP_SETS: SamgyupSetDetail[] = [
     timeLimit: "2 Hours",
     tagline: "Unlimited Pork + Unlimited Chicken + Unlimited Lettuce & Cheese!",
     highlightBadge: "Most Popular",
+    image: "/dishes/samgyup-feast-grill.jpg",
     unlimitedItems: [
       "Unlimited White Rice",
       "Unlimited Side Dishes (All 8 Varieties)",
@@ -289,6 +291,7 @@ export const SAMGYUP_SETS: SamgyupSetDetail[] = [
     timeLimit: "2 Hours",
     tagline: "The Ultimate Feast: All-You-Can-Eat Pak na Pak Chicken + Samgyupsal + Bottomless Iced Tea",
     highlightBadge: "Grand VIP Feast",
+    image: "/dishes/samgyup-lettuce-wrap.jpg",
     unlimitedItems: [
       "UNLIMITED Signature Pak na Pak Fried Chicken (All 12 Glaze Flavors!)",
       "Unlimited Samgyup Pork & Chicken (3 Flavors)",

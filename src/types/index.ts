@@ -75,6 +75,7 @@ export interface SamgyupSetDetail {
   timeLimit: string;
   tagline: string;
   highlightBadge?: string;
+  image?: string;
   unlimitedItems: string[];
   complimentary: string[];
   sideDishes: string[];
