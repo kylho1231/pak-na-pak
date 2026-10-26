@@ -125,8 +125,8 @@ export default function HeroSection() {
               <div className="relative rounded-3xl p-2 sm:p-3 bg-gradient-to-b from-pak-yellow via-amber-400 to-amber-600 shadow-2xl shadow-pak-yellow/20">
                 <div className="relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 aspect-[4/4.8]">
                   <Image
-                    src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=1200&auto=format&fit=crop"
-                    alt="Crispy Pak na Pak Fried Chicken"
+                    src="/dishes/full-pak-meal-spaghetti.jpg"
+                    alt="Crispy Pak na Pak Full Pak Meal"
                     fill
                     className="object-cover"
                     priority

@@ -168,8 +168,8 @@ export default function SamgyupShowcase() {
           <div className="lg:col-span-5 bg-zinc-900 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-6 border border-zinc-700">
               <Image
-                src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop"
-                alt="Pak na Pak Samgyupsal Grill"
+                src="/dishes/samgyupsal-wrap.jpg"
+                alt="Pak na Pak Samgyupsal Fresh Wrap"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 400px"

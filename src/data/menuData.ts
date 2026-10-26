@@ -14,7 +14,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "3 pcs Chicken + Rice",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pak-meal-3pcs.png",
     inclusions: ["3 pcs Fried Chicken", "1 Cup White Rice", "Choice of 12 Glaze Flavors"],
   },
   {
@@ -30,7 +30,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     portion: "2 pcs Chicken + Pasta + Rice",
     hasFlavorSelection: true,
     hasPastaSelection: true,
-    image: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-spaghetti.jpg",
     inclusions: ["2 pcs Fried Chicken", "Pasta (Spaghetti or Carbonara)", "1 Cup White Rice"],
   },
   {
@@ -42,7 +42,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Solo Treat",
     inStock: true,
     hasPastaSelection: true,
-    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-carbonara.jpg",
     portion: "1 Bowl Pasta",
   },
   {
@@ -53,7 +53,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Extra scoop of hot, freshly steamed white rice.",
     inStock: true,
     portion: "1 Cup",
-    image: "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pak-meal-3pcs.png",
   },
 
   // CHAO FAN SPECIALS (NEW MENU)
@@ -69,7 +69,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isNew: true,
     inStock: true,
     portion: "1 Bowl w/ 4 pcs Siomai",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/siomai-chao-fan.jpg",
     sauceOptions: ["Chili Garlic Dip", "Sweet Chili", "Savory Gravy"],
   },
   {
@@ -83,7 +83,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isNew: true,
     inStock: true,
     portion: "1 Bowl w/ Crispy Shanghai",
-    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/shanghai-chao-fan.jpg",
   },
   {
     id: "porkchop-chao-fan",
@@ -95,7 +95,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isNew: true,
     inStock: true,
     portion: "1 Large Porkchop + Chao Fan",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/porkchop-chao-fan.jpg",
   },
   {
     id: "fried-chicken-chao-fan",
@@ -109,7 +109,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     hasFlavorSelection: true,
     portion: "Crispy Chicken + Chao Fan",
-    image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/fried-chicken-chao-fan.jpg",
   },
 
   // UNLIMITED FEASTS
@@ -124,7 +124,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "Unlimited Dine-in",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pak-meal-3pcs.png",
     inclusions: ["Unlimited Fried Chicken", "Unlimited White Rice", "Choice of 12 Glazes"],
   },
   {
@@ -140,7 +140,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     portion: "Unlimited Dine-in",
     hasFlavorSelection: true,
     hasPastaSelection: true,
-    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-spaghetti.jpg",
     inclusions: ["Unlimited Fried Chicken", "Unlimited White Rice", "Unlimited Pasta (Spaghetti / Carbonara)"],
   },
   {
@@ -156,7 +156,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     portion: "Unlimited Dine-in",
     hasFlavorSelection: true,
     hasPastaSelection: true,
-    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/unli-pak-plate.jpg",
     inclusions: ["Unlimited Fried Chicken", "Unlimited White Rice", "Unlimited Pasta", "Unlimited Chilled Iced Tea"],
   },
 
@@ -173,7 +173,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "1 Sizzling Plate",
     sauceOptions: ["Original Teppan Sauce", "Korean BBQ Sauce"],
-    image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pork-pepper-rice.jpg",
   },
   {
     id: "chicken-pepper-rice",
@@ -185,7 +185,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "1 Sizzling Plate",
     sauceOptions: ["Original Teppan Sauce", "Korean BBQ Sauce"],
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pork-pepper-rice.jpg",
   },
   {
     id: "korean-bibimbowl",
@@ -198,7 +198,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "1 Large Bowl",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/korean-bibimbowl.jpg",
   },
   {
     id: "sisig-platter",
@@ -209,7 +209,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Barkada Sharing",
     inStock: true,
     portion: "Platter for 2-3 pax",
-    image: "https://images.unsplash.com/photo-1514944298352-78d123e42152?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/sizzling-sisig.jpg",
   },
 
   // SIZZLING PLATES (ALL ₱99 SIZZLERS)
@@ -224,7 +224,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Sizzling Plate + Rice",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/sizzling-sisig.jpg",
   },
   {
     id: "sizzling-burger-steak",
@@ -235,7 +235,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "₱99 Sizzler",
     inStock: true,
     portion: "1 Patty + Rice",
-    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/sizzling-sisig.jpg",
   },
   {
     id: "sizzling-3pcs-chicken",
@@ -246,7 +246,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "₱99 Sizzler",
     inStock: true,
     portion: "3 pcs Chicken + Rice",
-    image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pak-meal-3pcs.png",
   },
   {
     id: "sizzling-porkchop",
@@ -257,7 +257,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "₱99 Sizzler",
     inStock: true,
     portion: "1 Porkchop + Rice",
-    image: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/porkchop-chao-fan.jpg",
   },
   {
     id: "sizzling-pork-liempo",
@@ -269,7 +269,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isBestSeller: true,
     inStock: true,
     portion: "Liempo Cutlet + Rice",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/sizzling-sisig.jpg",
   },
   {
     id: "sizzling-beef-hotdog",
@@ -280,7 +280,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "₱99 Sizzler",
     inStock: true,
     portion: "Beef Hotdog + Rice",
-    image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-carbonara.jpg",
   },
 
   // SAMGYUPSAL SETS
@@ -294,7 +294,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/samgyupsal-wrap.jpg",
   },
   {
     id: "samgyup-set-b",
@@ -307,7 +307,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/samgyupsal-wrap.jpg",
   },
   {
     id: "samgyup-set-c",
@@ -319,7 +319,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Per Head (Min 2 pax)",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/samgyupsal-wrap.jpg",
   },
   {
     id: "samgyup-addon-lettuce",
@@ -329,7 +329,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Fresh, chilled crisp green lettuce leaves for your Korean meat wraps.",
     inStock: true,
     portion: "1 Basket",
-    image: "https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/samgyupsal-wrap.jpg",
   },
   {
     id: "samgyup-addon-cheese-dip",
@@ -339,7 +339,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Warm, rich stretchy cheese dip (choice of Cheddar or Chili Cheese).",
     inStock: true,
     portion: "1 Cup",
-    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-spaghetti.jpg",
   },
   {
     id: "samgyup-addon-cheesy-corn",
@@ -349,7 +349,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Sweet golden corn kernels baked in gooey melted cheese and butter.",
     inStock: true,
     portion: "1 Dish",
-    image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/pork-pepper-rice.jpg",
   },
 
   // TAKE-OUT BUNDLES
@@ -365,7 +365,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "10 pcs (Serves 3-4)",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/chicken-bundle-wings.jpg",
   },
   {
     id: "bundle-20pcs-chicken",
@@ -378,7 +378,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "20 pcs (Serves 6-8)",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/chicken-bundle-wings.jpg",
   },
   {
     id: "family-pan-spaghetti",
@@ -389,7 +389,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Celebration Size",
     inStock: true,
     portion: "Family Pan (Serves 6-8)",
-    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-spaghetti.jpg",
   },
   {
     id: "family-pan-carbonara",
@@ -400,7 +400,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Celebration Size",
     inStock: true,
     portion: "Family Pan (Serves 6-8)",
-    image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/full-pak-meal-carbonara.jpg",
   },
 
   // SNACKS & SIDES
@@ -415,7 +415,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "1 Burger",
     sauceOptions: ["Garlic Mayo", "Spicy Korean Sauce"],
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/chicken-pak-burger.jpg",
   },
   {
     id: "loaded-cheesy-fries",
@@ -428,7 +428,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isFeatured: true,
     inStock: true,
     portion: "Loaded Tray",
-    image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/loaded-cheesy-fries.jpg",
   },
   {
     id: "flavored-loaded-fries",
@@ -440,7 +440,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     inStock: true,
     portion: "Loaded Tray",
     hasFlavorSelection: true,
-    image: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/loaded-cheesy-fries.jpg",
   },
   {
     id: "regular-fries",
@@ -450,7 +450,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Golden fried French fries seasoned with special salt and served with savory dip.",
     inStock: true,
     portion: "1 Solo Box",
-    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/loaded-cheesy-fries.jpg",
   },
   {
     id: "chicken-fingers-w-fries",
@@ -461,7 +461,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Snack Combo",
     inStock: true,
     portion: "4 pcs Tenders + Fries",
-    image: "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/chicken-bundle-wings.jpg",
   },
   {
     id: "chicken-poppers",
@@ -472,7 +472,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Quick Bite",
     inStock: true,
     portion: "1 Box",
-    image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/chicken-bundle-wings.jpg",
   },
 
   // DRINKS, PITCHERS & BEER
@@ -486,7 +486,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     isBestSeller: true,
     inStock: true,
     portion: "1 Full Pitcher",
-    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "pitcher-cucumber",
@@ -497,7 +497,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Crowd Pick",
     inStock: true,
     portion: "1 Full Pitcher",
-    image: "https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "pitcher-iced-tea",
@@ -507,7 +507,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Classic sweet and citrus house-blend iced tea served with fresh ice.",
     inStock: true,
     portion: "1 Full Pitcher",
-    image: "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "softdrinks-12oz",
@@ -517,7 +517,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Chilled canned/bottled soda (Coke, Sprite, Royal).",
     inStock: true,
     portion: "12 oz",
-    image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "softdrinks-1liter",
@@ -527,7 +527,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "1 Liter bottle of chilled soda for sharing.",
     inStock: true,
     portion: "1 Liter",
-    image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "softdrinks-1-5liter",
@@ -537,7 +537,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "1.5 Liters party bottle of soda.",
     inStock: true,
     portion: "1.5 Liters",
-    image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "red-horse-stallion",
@@ -547,7 +547,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Extra strong beer 330ml bottle, served cold.",
     inStock: true,
     portion: "330 ml",
-    image: "https://images.unsplash.com/photo-1608270107297-c1d431c34a2e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "red-horse-500",
@@ -557,7 +557,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Cold 500ml Red Horse bottle.",
     inStock: true,
     portion: "500 ml",
-    image: "https://images.unsplash.com/photo-1608270107297-c1d431c34a2e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "san-mig-light",
@@ -567,7 +567,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Crisp, low-calorie lager beer.",
     inStock: true,
     portion: "330 ml",
-    image: "https://images.unsplash.com/photo-1608270107297-c1d431c34a2e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "flavored-sml",
@@ -577,7 +577,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Sweet, refreshing fruit-flavored beer.",
     inStock: true,
     portion: "330 ml",
-    image: "https://images.unsplash.com/photo-1608270107297-c1d431c34a2e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "pilsen",
@@ -587,7 +587,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Classic heritage Filipino pilsen beer.",
     inStock: true,
     portion: "330 ml",
-    image: "https://images.unsplash.com/photo-1608270107297-c1d431c34a2e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "jinro-soju",
@@ -598,7 +598,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     badge: "Samgyup Best Friend",
     inStock: true,
     portion: "360 ml Bottle",
-    image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "yakult",
@@ -608,7 +608,7 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Chilled sweet probiotic drink.",
     inStock: true,
     portion: "1 Bottle",
-    image: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
   {
     id: "bottled-water",
@@ -618,6 +618,6 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     description: "Purified drinking water 500ml.",
     inStock: true,
     portion: "500 ml",
-    image: "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?q=80&w=900&auto=format&fit=crop",
+    image: "/dishes/drinks-and-soju.jpg",
   },
 ];

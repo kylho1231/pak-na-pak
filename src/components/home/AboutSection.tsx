@@ -25,8 +25,8 @@ export default function AboutSection() {
               {/* Main Image */}
               <div className="relative rounded-3xl overflow-hidden aspect-[4/4.8] shadow-2xl border-4 border-pak-yellow">
                 <Image
-                  src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop"
-                  alt="Pak na Pak Barkada Dining Experience"
+                  src="/dishes/full-pak-meal-carbonara.jpg"
+                  alt="Pak na Pak Full Pak Meal with Carbonara"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 450px"
