@@ -34,15 +34,22 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { label: "Menu", href: "/#menu" },
+    { label: "Best Sellers", href: "/#bestsellers" },
+    { label: "Unlimited", href: "/#unlimited" },
+    { label: "Samgyupsal", href: "/#samgyup" },
+    { label: "Location", href: "/#contact" },
+  ];
+
+  const mobileNavLinks = [
     { label: "Home", href: "/" },
     { label: "Full Menu", href: "/#menu" },
     { label: "Best Sellers", href: "/#bestsellers" },
-    { label: "Delivery Riders", href: "/#delivery" },
-    { label: "Unlimited", href: "/#unlimited" },
-    { label: "Samgyupsal", href: "/#samgyup" },
+    { label: "Unlimited Meals", href: "/#unlimited" },
+    { label: "Samgyupsal Grill", href: "/#samgyup" },
     { label: "₱99 Promos", href: "/#promos" },
-    { label: "About", href: "/#about" },
-    { label: "Location", href: "/#contact" },
+    { label: "About Pak na Pak", href: "/#about" },
+    { label: "Store Location & Hours", href: "/#contact" },
   ];
 
   return (
@@ -51,29 +58,39 @@ export default function Navbar() {
       <div className="bg-pak-black text-white text-xs font-medium py-1.5 px-4 border-b border-zinc-800">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 text-pak-yellow font-semibold">
+            <span className="inline-flex items-center gap-1.5 text-pak-yellow font-semibold whitespace-nowrap">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               Open Now in San Jose, Antique
             </span>
-            <span className="hidden md:inline text-zinc-400">|</span>
-            <span className="hidden md:inline-flex items-center gap-1 text-zinc-300">
+            <span className="hidden md:inline text-zinc-500">|</span>
+            <span className="hidden md:inline-flex items-center gap-1 text-zinc-300 whitespace-nowrap">
               <Clock className="w-3.5 h-3.5 text-pak-yellow" />
               10:00 AM - 9:00 PM Daily
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link
+              href="/dashboard"
+              className="text-zinc-300 hover:text-pak-yellow transition-colors flex items-center gap-1.5 text-xs cursor-pointer font-medium whitespace-nowrap"
+              title="Store Analytics & Inventory Management"
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-pak-yellow" />
+              <span>Store Data App</span>
+            </Link>
+            <span className="text-zinc-700 hidden sm:inline">|</span>
             <button
               onClick={() => openScanModal(0)}
-              className="text-pak-yellow hover:text-white transition-colors flex items-center gap-1 text-xs cursor-pointer font-medium"
+              className="text-pak-yellow hover:text-white transition-colors flex items-center gap-1 text-xs cursor-pointer font-medium whitespace-nowrap"
               aria-label="View original physical menu scans"
             >
               <FileText className="w-3.5 h-3.5" />
               <span className="underline underline-offset-2">Original Menu Scans</span>
             </button>
+            <span className="text-zinc-700 hidden sm:inline">|</span>
             <a
               href={`tel:${STORE_INFO.contactNumber}`}
-              className="hidden sm:flex items-center gap-1 text-zinc-300 hover:text-pak-yellow transition-colors"
+              className="hidden sm:flex items-center gap-1 text-zinc-300 hover:text-pak-yellow transition-colors whitespace-nowrap"
             >
               <Phone className="w-3 h-3 text-pak-yellow" />
               <span>{STORE_INFO.contactNumber}</span>
@@ -90,37 +107,37 @@ export default function Navbar() {
             : "bg-pak-black text-white py-3.5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           {/* Brand Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-pak-yellow rounded-lg p-1"
+            className="flex items-center gap-2.5 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-pak-yellow rounded-lg p-1 shrink-0"
           >
-            <div className="w-10 h-10 rounded-xl bg-pak-yellow flex items-center justify-center font-display font-black text-pak-black text-xl shadow-md group-hover:scale-105 transition-transform duration-200">
+            <div className="w-10 h-10 rounded-xl bg-pak-yellow flex items-center justify-center font-display font-black text-pak-black text-xl shadow-md group-hover:scale-105 transition-transform duration-200 shrink-0">
               <Flame className="w-6 h-6 fill-pak-black text-pak-black" />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="font-display font-black tracking-tight text-xl sm:text-2xl text-white group-hover:text-pak-yellow transition-colors">
+              <div className="flex items-center gap-1.5">
+                <span className="font-display font-black tracking-tight text-xl sm:text-2xl text-white group-hover:text-pak-yellow transition-colors whitespace-nowrap">
                   Pak na Pak
                 </span>
-                <span className="bg-pak-yellow text-pak-black font-extrabold text-[10px] uppercase px-1.5 py-0.5 rounded tracking-wide">
+                <span className="bg-pak-yellow text-pak-black font-extrabold text-[10px] uppercase px-1.5 py-0.5 rounded tracking-wide shrink-0">
                   Antique
                 </span>
               </div>
-              <span className="text-[11px] text-zinc-400 font-medium tracking-tight -mt-1 hidden sm:block">
+              <span className="text-[11px] text-zinc-400 font-medium tracking-tight -mt-0.5 hidden sm:block whitespace-nowrap">
                 Sulit sa Sarap. Busog Ka.
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-zinc-200">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-3 text-sm font-bold text-zinc-200">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="px-3 py-1.5 rounded-lg hover:text-pak-yellow hover:bg-zinc-850/80 transition-colors duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+                className="px-3 py-1.5 rounded-lg hover:text-pak-yellow hover:bg-zinc-800/70 transition-colors duration-150 cursor-pointer whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pak-yellow"
               >
                 {link.label}
               </Link>
@@ -128,21 +145,11 @@ export default function Navbar() {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Store Analytics / Data App */}
-            <Link
-              href="/dashboard"
-              className="hidden xl:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-bold px-2.5 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
-              title="View Store Analytics & Inventory Dashboard"
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-pak-yellow" />
-              <span>Data App</span>
-            </Link>
-
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Direct Delivery Riders Contact */}
             <button
               onClick={() => openDeliveryModal()}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pak-yellow"
               aria-label="Contact Antique Delivery Riders"
             >
               <Bike className="w-4 h-4 text-pak-yellow stroke-[2.2]" />
@@ -154,28 +161,28 @@ export default function Navbar() {
               href={STORE_INFO.messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              className="hidden md:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2.5 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pak-yellow"
               aria-label="Chat on Facebook Messenger"
             >
               <MessageCircle className="w-4 h-4 text-pak-yellow" />
-              <span>Messenger</span>
+              <span className="hidden xl:inline">Messenger</span>
             </a>
 
             {/* Cart / Order Bag Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative inline-flex items-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:shadow-pak-yellow/20 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pak-yellow"
+              className="relative inline-flex items-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:shadow-pak-yellow/20 hover:scale-[1.02] whitespace-nowrap shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pak-yellow"
               aria-label={`Open order tray with ${cartCount} items, total ₱${cartTotal}`}
             >
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4 shrink-0" />
               <span className="hidden xs:inline">Order Bag</span>
               {cartCount > 0 && (
-                <span className="bg-pak-black text-pak-yellow font-black text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-pak-black text-pak-yellow font-black text-xs px-2 py-0.5 rounded-full shrink-0">
                   {cartCount}
                 </span>
               )}
               {cartTotal > 0 && (
-                <span className="hidden md:inline font-black text-xs bg-black/10 px-1.5 py-0.5 rounded">
+                <span className="hidden md:inline font-black text-xs bg-black/10 px-1.5 py-0.5 rounded shrink-0">
                   ₱{cartTotal}
                 </span>
               )}
@@ -184,7 +191,7 @@ export default function Navbar() {
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-pak-yellow transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              className="lg:hidden p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-pak-yellow transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-pak-yellow shrink-0"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
@@ -196,7 +203,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-pak-black border-t border-zinc-800 px-4 pt-3 pb-6 animate-fadeIn">
             <div className="flex flex-col space-y-1">
-              {navLinks.map((link) => (
+              {mobileNavLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
