@@ -16,10 +16,16 @@ import {
   User,
   Sparkles,
   Bike,
+  Navigation,
+  LocateFixed,
+  Loader2,
+  CheckCircle2,
+  ExternalLink,
+  RefreshCw,
 } from "lucide-react";
 import confetti from "canvas-confetti";
-import { useCart } from "@/context/CartContext";
-import { STORE_INFO, DELIVERY_PARTNERS } from "@/data/storeData";
+import { useCart, DeliveryLiveLocation } from "@/context/CartContext";
+import { STORE_INFO } from "@/data/storeData";
 
 export default function OrderDrawer() {
   const {
@@ -34,14 +40,119 @@ export default function OrderDrawer() {
     openDeliveryModal,
   } = useCart();
 
-  const [orderType, setOrderType] = useState<"dine-in" | "take-out" | "delivery">("dine-in");
+  const [orderType, setOrderType] = useState<"dine-in" | "take-out" | "delivery">("delivery");
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
+  // Live GPS Location State for Drawer
+  const [drawerGps, setDrawerGps] = useState<DeliveryLiveLocation | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
+
   if (!isCartOpen) return null;
+
+  // Accurate GPS Location Detection for Order Bag
+  const handleDetectLocation = () => {
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      setLocationError("Geolocation is not supported on this device/browser.");
+      return;
+    }
+
+    setIsLocating(true);
+    setLocationError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const accuracy = Math.round(pos.coords.accuracy);
+        const mapUrl = `https://www.google.com/maps?q=${lat.toFixed(6)},${lng.toFixed(6)}`;
+
+        // Smart Antique town fallback detection based on coordinates
+        let townName = "San Jose de Buenavista, Antique";
+        if (lat >= 10.77 && lat <= 10.86) {
+          townName = "Sibalom, Antique";
+        } else if (lat < 10.72) {
+          townName = "Hamtic, Antique";
+        } else if (lat > 10.86) {
+          townName = "Belison / Patnongon, Antique";
+        }
+
+        let addressText = `${townName} (GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+
+        // Reverse geocoding lookup via OpenStreetMap
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 3500);
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`,
+            { signal: controller.signal }
+          );
+          clearTimeout(timeoutId);
+          if (res.ok) {
+            const data = await res.json();
+            const parts = [
+              data.address?.road || data.address?.pedestrian,
+              data.address?.suburb || data.address?.village || data.address?.neighbourhood,
+              data.address?.town || data.address?.city || data.address?.municipality || townName,
+            ].filter(Boolean);
+            if (parts.length > 0) {
+              addressText = parts.join(", ");
+            } else if (data.display_name) {
+              addressText = data.display_name.split(",").slice(0, 3).join(", ");
+            }
+          }
+        } catch {
+          // Fallback to townName
+        }
+
+        const locationData: DeliveryLiveLocation = {
+          lat,
+          lng,
+          accuracy,
+          addressText,
+          mapUrl,
+        };
+
+        setDrawerGps(locationData);
+
+        if (!customerAddress) {
+          setCustomerAddress(addressText);
+        }
+
+        setIsLocating(false);
+
+        try {
+          confetti({
+            particleCount: 50,
+            spread: 55,
+            origin: { y: 0.6 },
+            colors: ["#10B981", "#FFC700", "#111111"],
+          });
+        } catch {
+          // Ignore
+        }
+      },
+      (err) => {
+        setIsLocating(false);
+        if (err.code === 1) {
+          setLocationError("Location permission denied. Please allow GPS access in your browser.");
+        } else if (err.code === 2) {
+          setLocationError("GPS position unavailable. Please ensure location services are turned on.");
+        } else {
+          setLocationError("Location request timed out. Please try again.");
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  };
 
   const generateOrderMessage = () => {
     const typeLabel =
@@ -55,6 +166,13 @@ export default function OrderDrawer() {
     msg += `📍 ORDER TYPE: ${typeLabel}\n`;
     if (customerName) msg += `👤 NAME: ${customerName}\n`;
     if (customerPhone) msg += `📱 PHONE: ${customerPhone}\n`;
+
+    if (orderType === "delivery" && drawerGps) {
+      msg += `📍 EXACT GOOGLE MAPS PIN: ${drawerGps.mapUrl}\n`;
+      msg += `📌 PINNED AREA: ${drawerGps.addressText}\n`;
+      msg += `🎯 GPS ACCURACY: ±${drawerGps.accuracy} meters\n`;
+    }
+
     if (customerAddress) {
       msg +=
         orderType === "dine-in"
@@ -81,7 +199,6 @@ export default function OrderDrawer() {
   };
 
   const handleMessengerOrder = () => {
-    // Trigger celebration confetti
     try {
       confetti({
         particleCount: 80,
@@ -94,12 +211,10 @@ export default function OrderDrawer() {
     }
 
     const message = generateOrderMessage();
-    // Copy to clipboard
     navigator.clipboard.writeText(message);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
 
-    // Open Messenger URL
     const encoded = encodeURIComponent(message);
     const messengerUrl = `${STORE_INFO.messengerUrl}?text=${encoded}`;
     window.open(messengerUrl, "_blank");
@@ -110,6 +225,26 @@ export default function OrderDrawer() {
     navigator.clipboard.writeText(message);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2500);
+  };
+
+  const handleOpenDeliveryPartnerModal = () => {
+    setIsCartOpen(false);
+    openDeliveryModal({
+      items: cart.map((c) => ({
+        name: c.name,
+        details: [c.selectedFlavor, c.selectedPasta, c.selectedSauce]
+          .filter(Boolean)
+          .join(", "),
+        price: c.price,
+        quantity: c.quantity,
+      })),
+      total: cartTotal,
+      customerName,
+      customerPhone,
+      customerAddress,
+      notes: orderNotes,
+      liveLocation: drawerGps || undefined,
+    });
   };
 
   return (
@@ -129,7 +264,7 @@ export default function OrderDrawer() {
         aria-labelledby="order-drawer-title"
       >
         {/* Drawer Header */}
-        <div className="bg-pak-black text-white p-4 sm:p-5 flex items-center justify-between border-b border-zinc-800">
+        <div className="bg-pak-black text-white p-4 sm:p-5 flex items-center justify-between border-b border-zinc-800 shrink-0">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-pak-yellow flex items-center justify-center text-pak-black">
               <ShoppingBag className="w-5 h-5" />
@@ -276,9 +411,9 @@ export default function OrderDrawer() {
                 <div className="grid grid-cols-3 gap-1.5">
                   {(
                     [
+                      { id: "delivery", label: "🛵 Delivery" },
                       { id: "dine-in", label: "🍽️ Dine-In" },
                       { id: "take-out", label: "🛍️ Take-Out" },
-                      { id: "delivery", label: "🛵 Delivery" },
                     ] as const
                   ).map((opt) => (
                     <button
@@ -295,6 +430,93 @@ export default function OrderDrawer() {
                     </button>
                   ))}
                 </div>
+
+                {/* GPS Location Detection in Delivery Mode */}
+                {orderType === "delivery" && (
+                  <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-black uppercase tracking-wide text-zinc-800 flex items-center gap-1.5">
+                        <Navigation className="w-3.5 h-3.5 text-amber-600" />
+                        Exact Delivery Location
+                      </span>
+
+                      {drawerGps && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          GPS Pinned
+                        </span>
+                      )}
+                    </div>
+
+                    {!drawerGps ? (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={handleDetectLocation}
+                          disabled={isLocating}
+                          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pak-yellow to-amber-400 hover:from-amber-400 hover:to-pak-yellow text-pak-black font-extrabold text-xs py-2.5 px-3 rounded-xl shadow-xs transition-all active:scale-98 cursor-pointer"
+                        >
+                          {isLocating ? (
+                            <>
+                              <Loader2 className="w-3.5 h-3.5 animate-spin text-pak-black" />
+                              <span>Detecting your live GPS coordinates...</span>
+                            </>
+                          ) : (
+                            <>
+                              <LocateFixed className="w-3.5 h-3.5 text-pak-black stroke-[2.4]" />
+                              <span>📍 Turn On GPS / Pin My Location Live</span>
+                            </>
+                          )}
+                        </button>
+                        <p className="text-[10px] text-zinc-500 text-center mt-1">
+                          Pins your live spot in Antique so riders deliver straight to your door.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="bg-white border border-emerald-300 rounded-lg p-2.5 space-y-1.5">
+                        <div className="flex items-start justify-between gap-1.5">
+                          <div>
+                            <span className="text-[10px] font-black text-emerald-700 flex items-center gap-1">
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                              Live Pin Confirmed
+                            </span>
+                            <p className="text-xs font-bold text-zinc-900 leading-snug">
+                              {drawerGps.addressText}
+                            </p>
+                            <p className="text-[10px] text-zinc-500 font-mono">
+                              ±{drawerGps.accuracy}m accuracy
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleDetectLocation}
+                            disabled={isLocating}
+                            title="Re-check GPS location"
+                            className="p-1 rounded bg-zinc-100 hover:bg-zinc-200 text-zinc-700 cursor-pointer"
+                          >
+                            <RefreshCw className={`w-3 h-3 ${isLocating ? "animate-spin" : ""}`} />
+                          </button>
+                        </div>
+
+                        <a
+                          href={drawerGps.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-800 hover:underline"
+                        >
+                          <span>View on Google Maps</span>
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      </div>
+                    )}
+
+                    {locationError && (
+                      <p className="text-[11px] text-rose-700 bg-rose-50 p-2 rounded-lg border border-rose-200">
+                        {locationError}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <div className="space-y-2 pt-1">
                   <div className="relative">
@@ -362,11 +584,8 @@ export default function OrderDrawer() {
               {/* Primary Delivery Rider Booking Button */}
               <button
                 type="button"
-                onClick={() => {
-                  setIsCartOpen(false);
-                  openDeliveryModal();
-                }}
-                className="w-full flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3.5 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+                onClick={handleOpenDeliveryPartnerModal}
+                className="w-full flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3.5 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer min-h-[44px]"
               >
                 <Bike className="w-5 h-5 stroke-[2.3]" />
                 <span>Contact Delivery Riders (Mr. Cartman, SUGO, ErrandPro)</span>
@@ -376,7 +595,7 @@ export default function OrderDrawer() {
               <button
                 type="button"
                 onClick={handleMessengerOrder}
-                className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-zinc-700 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-zinc-700 transition-colors cursor-pointer min-h-[44px]"
               >
                 <MessageCircle className="w-4 h-4 text-pak-yellow" />
                 <span>Or Message Pak na Pak Store Directly</span>
@@ -387,12 +606,12 @@ export default function OrderDrawer() {
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className="flex-1 flex items-center justify-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer min-h-[44px]"
                 >
                   {isCopied ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">Copied to Clipboard!</span>
+                      <span className="text-emerald-700 font-bold">Copied with Live Pin!</span>
                     </>
                   ) : (
                     <>
@@ -404,7 +623,7 @@ export default function OrderDrawer() {
 
                 <a
                   href={`tel:${STORE_INFO.contactNumber}`}
-                  className="flex items-center justify-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer min-h-[44px]"
                 >
                   <Phone className="w-3.5 h-3.5 text-amber-600" />
                   <span>Call Store</span>

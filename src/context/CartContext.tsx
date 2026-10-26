@@ -3,6 +3,14 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { CartItem, MenuItem } from "@/types";
 
+export interface DeliveryLiveLocation {
+  lat: number;
+  lng: number;
+  accuracy: number;
+  addressText: string;
+  mapUrl: string;
+}
+
 export interface DeliveryOrderPayload {
   items: Array<{
     name: string;
@@ -11,6 +19,11 @@ export interface DeliveryOrderPayload {
     quantity: number;
   }>;
   total: number;
+  customerName?: string;
+  customerPhone?: string;
+  customerAddress?: string;
+  notes?: string;
+  liveLocation?: DeliveryLiveLocation;
 }
 
 interface CartContextType {
