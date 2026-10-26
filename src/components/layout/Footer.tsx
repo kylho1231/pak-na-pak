@@ -20,7 +20,7 @@ export default function Footer() {
   const { openScanModal } = useCart();
 
   return (
-    <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow">
+    <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow pb-24 md:pb-0">
       {/* Pre-Footer Action Banner */}
       <div className="bg-gradient-to-r from-amber-500 via-pak-yellow to-amber-400 text-pak-black py-10 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">

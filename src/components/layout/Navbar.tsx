@@ -161,11 +161,11 @@ export default function Navbar() {
             {/* Cart / Order Bag Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative inline-flex items-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:shadow-pak-yellow/20 hover:scale-[1.02] whitespace-nowrap shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pak-yellow"
-              aria-label={`Open order tray with ${cartCount} items, total ₱${cartTotal}`}
+              className="relative inline-flex items-center gap-1.5 sm:gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:shadow-pak-yellow/20 hover:scale-[1.02] whitespace-nowrap shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pak-yellow min-h-[40px]"
+              aria-label={`Open order bag with ${cartCount} items, total ₱${cartTotal}`}
             >
               <ShoppingBag className="w-4 h-4 shrink-0" />
-              <span className="hidden xs:inline">Order Bag</span>
+              <span>Bag</span>
               {cartCount > 0 && (
                 <span className="bg-pak-black text-pak-yellow font-black text-xs px-2 py-0.5 rounded-full shrink-0">
                   {cartCount}

@@ -114,13 +114,13 @@ export default function FlavorsShowcase() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="w-full md:w-auto flex items-center justify-center gap-3 shrink-0">
             <button
               type="button"
               onClick={handleOrderWithFlavor}
-              className="inline-flex items-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer text-center min-h-[44px]"
             >
-              <Utensils className="w-4 h-4" />
+              <Utensils className="w-4 h-4 shrink-0" />
               <span>Order Pak Meal with this Flavor (₱99)</span>
             </button>
           </div>

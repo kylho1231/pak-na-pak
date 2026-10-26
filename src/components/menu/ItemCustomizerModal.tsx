@@ -264,29 +264,32 @@ export default function ItemCustomizerModal() {
         </div>
 
         {/* Footer with Quantity & Add to Cart button */}
-        <div className="p-4 sm:p-5 bg-white border-t border-zinc-200 flex items-center justify-between gap-4 shrink-0">
+        <div className="p-3.5 sm:p-5 bg-white border-t border-zinc-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
           {/* Quantity Selector */}
-          <div className="flex items-center gap-3 bg-zinc-100 border border-zinc-200 rounded-xl px-2 py-1.5">
-            <button
-              type="button"
-              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              disabled={quantity <= 1}
-              className="p-1.5 rounded-lg hover:bg-zinc-200 disabled:opacity-30 cursor-pointer text-zinc-800"
-              aria-label="Decrease quantity"
-            >
-              <Minus className="w-4 h-4" />
-            </button>
-            <span className="font-display font-black text-sm text-zinc-900 w-5 text-center">
-              {quantity}
-            </span>
-            <button
-              type="button"
-              onClick={() => setQuantity((q) => q + 1)}
-              className="p-1.5 rounded-lg hover:bg-zinc-200 cursor-pointer text-zinc-800"
-              aria-label="Increase quantity"
-            >
-              <Plus className="w-4 h-4" />
-            </button>
+          <div className="flex items-center justify-between sm:justify-start gap-3 bg-zinc-100 border border-zinc-200 rounded-xl px-3 py-1.5 shrink-0">
+            <span className="text-xs font-bold text-zinc-600 sm:hidden">Quantity:</span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                disabled={quantity <= 1}
+                className="p-1.5 rounded-lg hover:bg-zinc-200 disabled:opacity-30 cursor-pointer text-zinc-800"
+                aria-label="Decrease quantity"
+              >
+                <Minus className="w-4 h-4" />
+              </button>
+              <span className="font-display font-black text-sm text-zinc-900 w-6 text-center">
+                {quantity}
+              </span>
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => q + 1)}
+                className="p-1.5 rounded-lg hover:bg-zinc-200 cursor-pointer text-zinc-800"
+                aria-label="Increase quantity"
+              >
+                <Plus className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           {/* Submit Actions */}
@@ -294,7 +297,7 @@ export default function ItemCustomizerModal() {
             <button
               type="button"
               onClick={handleOrderViaRider}
-              className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+              className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer min-h-[44px]"
             >
               <Bike className="w-4 h-4 stroke-[2.3]" />
               <span>Order via Delivery Rider • ₱{totalPrice}</span>
@@ -302,7 +305,7 @@ export default function ItemCustomizerModal() {
             <button
               type="button"
               onClick={handleAdd}
-              className="w-full sm:w-auto text-[11px] font-bold text-zinc-600 hover:text-black hover:bg-zinc-100 py-2 sm:py-3 px-3 rounded-xl border border-zinc-200 transition-colors cursor-pointer"
+              className="w-full sm:w-auto text-xs font-bold text-zinc-700 hover:text-black hover:bg-zinc-100 py-2.5 sm:py-3 px-3.5 rounded-xl border border-zinc-200 transition-colors cursor-pointer text-center min-h-[44px]"
               title="Add to multi-item pabili list"
             >
               + Add to List

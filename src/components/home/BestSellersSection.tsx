@@ -133,18 +133,18 @@ export default function BestSellersSection() {
                   type="button"
                   onClick={() => handleItemClick(item)}
                   disabled={!item.inStock}
-                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition-all duration-150 cursor-pointer ${
+                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition-all duration-150 cursor-pointer min-h-[44px] ${
                     item.inStock
                       ? "bg-pak-black hover:bg-zinc-800 text-white hover:text-pak-yellow shadow-md active:scale-98"
                       : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
                   }`}
                 >
-                  <Bike className="w-4 h-4 text-pak-yellow" />
-                  <span>
+                  <Bike className="w-4 h-4 text-pak-yellow shrink-0" />
+                  <span className="truncate">
                     {item.inStock
                       ? item.hasFlavorSelection || item.hasPastaSelection
                         ? "Select Glaze & Order via Rider"
-                        : `Order via Delivery Rider • ₱${item.price}`
+                        : `Order via Rider • ₱${item.price}`
                       : "Sold Out Today"}
                   </span>
                 </button>

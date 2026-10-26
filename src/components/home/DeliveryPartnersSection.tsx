@@ -87,7 +87,7 @@ export default function DeliveryPartnersSection() {
                   href={partner.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-pak-black hover:bg-zinc-800 text-white hover:text-pak-yellow font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow transition-colors cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-pak-black hover:bg-zinc-800 text-white hover:text-pak-yellow font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow transition-colors cursor-pointer min-h-[44px]"
                 >
                   <MessageCircle className="w-4 h-4 text-pak-yellow" />
                   <span>Contact {partner.name}</span>

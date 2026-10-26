@@ -43,23 +43,23 @@ export default function AboutSection() {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -top-4 -left-4 sm:-left-6 bg-pak-black text-white p-3.5 rounded-2xl shadow-xl border-2 border-pak-yellow flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-pak-yellow flex items-center justify-center text-pak-black font-black">
-                  <Award className="w-6 h-6" />
+              <div className="absolute top-2 left-2 sm:-top-4 sm:-left-6 bg-pak-black text-white p-2.5 sm:p-3.5 rounded-2xl shadow-xl border-2 border-pak-yellow flex items-center gap-2.5 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-pak-yellow flex items-center justify-center text-pak-black font-black shrink-0">
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <span className="font-display font-black text-sm block leading-tight text-white">
+                  <span className="font-display font-black text-xs sm:text-sm block leading-tight text-white">
                     Proudly Local
                   </span>
-                  <span className="text-[11px] text-zinc-400">
+                  <span className="text-[10px] sm:text-[11px] text-zinc-400">
                     San Jose de Buenavista
                   </span>
                 </div>
               </div>
 
               {/* Floating Stat Pill */}
-              <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-pak-yellow text-pak-black p-3 rounded-2xl shadow-xl border border-black/10 flex items-center gap-2 font-display font-black text-xs">
-                <Heart className="w-4 h-4 fill-pak-black" />
+              <div className="absolute bottom-2 right-2 sm:-bottom-4 sm:-right-6 bg-pak-yellow text-pak-black p-2 sm:p-3 rounded-2xl shadow-xl border border-black/10 flex items-center gap-1.5 sm:gap-2 font-display font-black text-[11px] sm:text-xs">
+                <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-pak-black shrink-0" />
                 <span>100% Sulit Guaranteed</span>
               </div>
             </div>

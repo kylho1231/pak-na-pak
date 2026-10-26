@@ -33,11 +33,11 @@ export default function HeroSection() {
           {/* Left Text Column (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             {/* Location & Status Tag */}
-            <div className="inline-flex items-center gap-2 bg-zinc-900 border border-pak-yellow/30 px-3.5 py-1.5 rounded-full text-xs font-bold text-zinc-200">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-pak-yellow">Now Serving in San Jose, Antique</span>
-              <span className="text-zinc-600">•</span>
-              <span className="text-zinc-400">Dine-In, Take-Out & Delivery</span>
+            <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 bg-zinc-900 border border-pak-yellow/30 px-3.5 py-1.5 rounded-full text-xs font-bold text-zinc-200 max-w-full">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+              <span className="text-pak-yellow whitespace-nowrap">Now Serving in San Jose, Antique</span>
+              <span className="text-zinc-600 hidden xs:inline">•</span>
+              <span className="text-zinc-400 whitespace-nowrap">Dine-In, Take-Out & Delivery</span>
             </div>
 
             {/* Main Punchy Headlines */}
@@ -135,12 +135,12 @@ export default function HeroSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                   {/* Top Floating Badge */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <span className="bg-pak-yellow text-pak-black font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-lg">
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex flex-wrap items-center justify-between gap-1.5">
+                    <span className="bg-pak-yellow text-pak-black font-extrabold text-[10px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-lg">
                       <Flame className="w-3.5 h-3.5 fill-pak-black" />
                       Antique’s #1 Crispy Fried Chicken
                     </span>
-                    <span className="bg-black/70 backdrop-blur-xs text-white text-xs font-bold px-2.5 py-1 rounded-full border border-zinc-700">
+                    <span className="bg-black/70 backdrop-blur-xs text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full border border-zinc-700">
                       ₱99 Meals
                     </span>
                   </div>
@@ -173,8 +173,8 @@ export default function HeroSection() {
               </div>
 
               {/* Floating Highlight Sticker: 12 Flavors */}
-              <div className="absolute -bottom-5 -left-4 sm:-left-6 bg-white text-pak-black p-3 sm:p-3.5 rounded-2xl shadow-xl border-2 border-pak-yellow flex items-center gap-3 animate-pulse-subtle">
-                <div className="w-10 h-10 rounded-xl bg-pak-yellow flex items-center justify-center font-black text-pak-black text-lg">
+              <div className="absolute -bottom-4 left-2 sm:-bottom-5 sm:-left-6 bg-white text-pak-black p-2.5 sm:p-3.5 rounded-2xl shadow-xl border-2 border-pak-yellow flex items-center gap-2.5 sm:gap-3 animate-pulse-subtle">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-pak-yellow flex items-center justify-center font-black text-pak-black text-base sm:text-lg shrink-0">
                   12
                 </div>
                 <div>
@@ -188,8 +188,8 @@ export default function HeroSection() {
               </div>
 
               {/* Floating Highlight Sticker: Chao Fan & Samgyup */}
-              <div className="absolute -top-4 -right-3 sm:-right-5 bg-pak-yellow text-pak-black font-extrabold text-xs px-3.5 py-2 rounded-2xl shadow-xl border border-black/20 flex items-center gap-1.5 rotate-2">
-                <Sparkles className="w-4 h-4 fill-pak-black" />
+              <div className="absolute -top-3 right-2 sm:-top-4 sm:-right-5 bg-pak-yellow text-pak-black font-extrabold text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-2xl shadow-xl border border-black/20 flex items-center gap-1.5 rotate-2">
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-pak-black shrink-0" />
                 <span>Chao Fan + Samgyup Grill</span>
               </div>
             </div>

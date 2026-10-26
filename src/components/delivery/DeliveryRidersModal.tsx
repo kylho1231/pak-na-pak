@@ -210,8 +210,8 @@ export default function DeliveryRidersModal() {
                 className="bg-white rounded-2xl p-4 border border-zinc-200 shadow-sm hover:shadow-md hover:border-pak-yellow transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
               >
                 <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                     <h3 className="font-display font-black text-base text-pak-black group-hover:text-amber-600 transition-colors">
                       {partner.name}
                     </h3>
@@ -227,15 +227,15 @@ export default function DeliveryRidersModal() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={() => handleSelectRider(partner)}
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs py-2.5 px-4 rounded-xl shadow cursor-pointer transition-transform active:scale-95"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs py-2.5 px-4 rounded-xl shadow cursor-pointer transition-transform active:scale-95 min-h-[44px]"
                   >
-                    <MessageCircle className="w-4 h-4 fill-pak-black" />
+                    <MessageCircle className="w-4 h-4 fill-pak-black shrink-0" />
                     <span>Contact on Facebook</span>
-                    <ExternalLink className="w-3 h-3 text-zinc-800 ml-0.5" />
+                    <ExternalLink className="w-3 h-3 text-zinc-800 ml-0.5 shrink-0" />
                   </button>
                 </div>
               </div>

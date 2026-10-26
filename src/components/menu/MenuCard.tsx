@@ -128,18 +128,18 @@ export default function MenuCard({ item }: MenuCardProps) {
           type="button"
           onClick={handleAction}
           disabled={!item.inStock}
-          className={`w-full flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl font-extrabold text-xs transition-all duration-150 cursor-pointer ${
+          className={`w-full flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl font-extrabold text-xs transition-all duration-150 cursor-pointer min-h-[44px] ${
             item.inStock
               ? "bg-pak-black hover:bg-zinc-800 text-white hover:text-pak-yellow active:scale-98 shadow-xs"
               : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
           }`}
         >
-          <Bike className="w-3.5 h-3.5 text-pak-yellow" />
-          <span>
+          <Bike className="w-3.5 h-3.5 text-pak-yellow shrink-0" />
+          <span className="truncate">
             {item.inStock
               ? item.hasFlavorSelection || item.hasPastaSelection
-                ? "Select Flavors & Order via Rider"
-                : `Order via Delivery Rider • ₱${item.price}`
+                ? "Select Glaze & Order"
+                : `Order via Rider • ₱${item.price}`
               : "Unavailable Today"}
           </span>
         </button>

@@ -61,14 +61,14 @@ export default function SamgyupShowcase() {
         </div>
 
         {/* Set Selector Tabs */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex bg-zinc-200/80 p-1.5 rounded-2xl gap-1.5 max-w-full overflow-x-auto">
+        <div className="flex justify-center mb-8 px-2">
+          <div className="grid grid-cols-3 sm:inline-flex w-full sm:w-auto bg-zinc-200/80 p-1.5 rounded-2xl gap-1.5 shadow-inner">
             {SAMGYUP_SETS.map((set, idx) => (
               <button
                 key={set.id}
                 type="button"
                 onClick={() => setSelectedSetIndex(idx)}
-                className={`py-2.5 px-4 sm:px-6 rounded-xl font-display font-black text-xs sm:text-sm transition-all duration-150 cursor-pointer flex items-center gap-2 ${
+                className={`py-2.5 px-2 sm:px-6 rounded-xl font-display font-black text-xs sm:text-sm transition-all duration-150 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 min-h-[44px] ${
                   selectedSetIndex === idx
                     ? "bg-pak-black text-white shadow-md scale-[1.02]"
                     : "text-zinc-700 hover:text-black hover:bg-zinc-300/60"
@@ -77,7 +77,7 @@ export default function SamgyupShowcase() {
                 <span>{set.code}</span>
                 <span className="text-pak-yellow font-black">₱{set.pricePerHead}</span>
                 {set.highlightBadge && (
-                  <span className="hidden sm:inline text-[9px] bg-pak-yellow text-pak-black px-1.5 py-0.2 rounded font-extrabold uppercase">
+                  <span className="hidden md:inline text-[9px] bg-pak-yellow text-pak-black px-1.5 py-0.2 rounded font-extrabold uppercase">
                     {set.highlightBadge}
                   </span>
                 )}

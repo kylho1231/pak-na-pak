@@ -203,8 +203,8 @@ export default function LocationSection() {
         </div>
 
         {/* Branch Selector Tabs */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex bg-zinc-200/80 p-1.5 rounded-2xl gap-2 max-w-full overflow-x-auto shadow-inner">
+        <div className="flex justify-center mb-8 px-2">
+          <div className="inline-flex w-full sm:w-auto bg-zinc-200/80 p-1.5 rounded-2xl gap-2 shadow-inner">
             {STORE_BRANCHES.map((branch) => {
               const isSelected = selectedBranchId === branch.id;
               return (
@@ -215,20 +215,20 @@ export default function LocationSection() {
                     setSelectedBranchId(branch.id);
                     setIsRatingSubmitted(false);
                   }}
-                  className={`py-3 px-5 sm:px-7 rounded-xl font-display font-black text-xs sm:text-sm transition-all duration-150 cursor-pointer flex items-center gap-2 whitespace-nowrap ${
+                  className={`flex-1 sm:flex-initial py-3 px-3 sm:px-7 rounded-xl font-display font-black text-xs sm:text-sm transition-all duration-150 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap min-h-[44px] ${
                     isSelected
                       ? "bg-pak-black text-white shadow-md scale-[1.02]"
                       : "text-zinc-700 hover:text-black hover:bg-zinc-300/60"
                   }`}
                 >
                   <MapPin
-                    className={`w-4 h-4 ${
+                    className={`w-4 h-4 shrink-0 ${
                       isSelected ? "text-pak-yellow" : "text-zinc-500"
                     }`}
                   />
                   <span>{branch.town}</span>
                   <span
-                    className={`text-[9px] uppercase px-1.5 py-0.5 rounded font-black ${
+                    className={`text-[9px] uppercase px-1.5 py-0.5 rounded font-black shrink-0 ${
                       isSelected
                         ? "bg-pak-yellow text-pak-black"
                         : "bg-zinc-300 text-zinc-700"
@@ -248,7 +248,7 @@ export default function LocationSection() {
           <div className="lg:col-span-6 space-y-6">
             {/* Branch Details Card */}
             <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200 shadow-md space-y-5">
-              <div className="flex items-start justify-between gap-3 border-b border-zinc-100 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-zinc-100 pb-4">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full inline-block mb-1">
                     {currentBranch.badge}
@@ -261,11 +261,11 @@ export default function LocationSection() {
                   </p>
                 </div>
 
-                <div className="text-right shrink-0">
+                <div className="text-left sm:text-right shrink-0">
                   <span className="text-[10px] uppercase font-bold text-zinc-400 block">
                     Coordinates Pin
                   </span>
-                  <span className="font-mono text-xs font-bold text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md block">
+                  <span className="font-mono text-xs font-bold text-zinc-800 bg-zinc-100 px-2 py-1 rounded-md inline-block sm:block">
                     {currentBranch.coordinates.str}
                   </span>
                 </div>
@@ -499,8 +499,8 @@ export default function LocationSection() {
                         </span>
                       </div>
 
-                      {/* 10 Buttons in a Row */}
-                      <div className="grid grid-cols-10 gap-1 sm:gap-1.5">
+                      {/* 10 Rating Buttons */}
+                      <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 sm:gap-1.5">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => {
                           const isActive = score === num;
                           return (
@@ -508,11 +508,12 @@ export default function LocationSection() {
                               key={num}
                               type="button"
                               onClick={() => setScore(num)}
-                              className={`aspect-square sm:aspect-auto sm:py-3 rounded-xl font-display font-black text-xs sm:text-sm flex items-center justify-center cursor-pointer transition-all ${
+                              className={`min-h-[44px] py-2.5 sm:py-3 rounded-xl font-display font-black text-sm flex items-center justify-center cursor-pointer transition-all ${
                                 isActive
                                   ? "bg-pak-yellow text-pak-black ring-2 ring-black scale-105 shadow-md font-black"
-                                  : "bg-zinc-100 hover:bg-zinc-200 text-zinc-700"
+                                  : "bg-zinc-100 hover:bg-zinc-200 text-zinc-700 active:scale-95"
                               }`}
+                              aria-label={`Rate ${num} out of 10`}
                             >
                               {num}
                             </button>
