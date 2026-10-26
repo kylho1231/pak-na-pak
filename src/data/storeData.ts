@@ -1,4 +1,4 @@
-import { StoreInfo, CategoryInfo, ChickenFlavorDetail, SamgyupSetDetail, PromoBanner, DeliveryPartner } from "@/types";
+import { StoreInfo, CategoryInfo, ChickenFlavorDetail, SamgyupSetDetail, PromoBanner, DeliveryPartner, BranchInfo } from "@/types";
 
 export const DELIVERY_PARTNERS: DeliveryPartner[] = [
   {
@@ -33,20 +33,70 @@ export const DELIVERY_PARTNERS: DeliveryPartner[] = [
   },
 ];
 
+export const STORE_BRANCHES: BranchInfo[] = [
+  {
+    id: "san-jose",
+    name: "Pak na Pak - San Jose Main",
+    town: "San Jose de Buenavista, Antique",
+    tagline: "Our flagship restaurant with full unli chicken, pasta, and samgyupsal grill",
+    badge: "Main Branch",
+    fullAddress: "San Jose de Buenavista, 5700 Antique, Philippines",
+    landmark: "Town Center, San Jose de Buenavista (Near EBJ Freedom Park & Trade Hall)",
+    coordinates: {
+      lat: 10.74189637279932,
+      lng: 121.93939029205245,
+      str: "10.741896, 121.939390",
+    },
+    facebookUrl: "https://www.facebook.com/pork.ever",
+    facebookHandle: "@pork.ever",
+    messengerUrl: "https://m.me/pork.ever",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=10.74189637279932,121.93939029205245",
+    googleMapsEmbedUrl: "https://maps.google.com/maps?q=10.74189637279932,121.93939029205245&hl=en&z=17&output=embed",
+    openingHours: "10:00 AM - 9:00 PM",
+    operatingDays: "Open Daily (Monday to Sunday)",
+    samgyupHours: "11:00 AM - 9:30 PM",
+    contactNumber: "+63 917 628 9102",
+  },
+  {
+    id: "sibalom",
+    name: "Pak na Pak - Sibalom Branch",
+    town: "Sibalom, Antique",
+    tagline: "Serving crispy fried chicken, rice bowls, and sulit barkada favorites in Sibalom",
+    badge: "Sibalom Branch",
+    fullAddress: "Sibalom, 5701 Antique, Philippines",
+    landmark: "Poblacion / Town Center, Sibalom, Antique",
+    coordinates: {
+      lat: 10.786897358232114,
+      lng: 122.01643319435914,
+      str: "10.786897, 122.016433",
+    },
+    facebookUrl: "https://www.facebook.com/profile.php?id=61594810508350",
+    facebookHandle: "Pak na Pak Sibalom",
+    messengerUrl: "https://m.me/61594810508350",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=10.786897358232114,122.01643319435914",
+    googleMapsEmbedUrl: "https://maps.google.com/maps?q=10.786897358232114,122.01643319435914&hl=en&z=17&output=embed",
+    openingHours: "10:00 AM - 9:00 PM",
+    operatingDays: "Open Daily (Monday to Sunday)",
+    samgyupHours: "11:00 AM - 9:00 PM",
+    contactNumber: "+63 917 628 9102",
+  },
+];
+
 export const STORE_INFO: StoreInfo = {
   name: "Pak na Pak",
   tagline: "Sulit sa Sarap. Busog Ka.",
-  location: "San Jose, Antique",
+  location: "San Jose & Sibalom, Antique",
   fullAddress: "San Jose de Buenavista, 5700 Antique, Philippines",
   landmark: "Town Center, San Jose de Buenavista (Near EBJ Freedom Park & Trade Hall)",
   contactNumber: "+63 917 628 9102",
-  facebookUrl: "https://www.facebook.com",
-  messengerUrl: "https://m.me",
+  facebookUrl: "https://www.facebook.com/pork.ever",
+  messengerUrl: "https://m.me/pork.ever",
   openingHours: "10:00 AM - 9:00 PM",
   operatingDays: "Open Daily (Monday to Sunday)",
   samgyupHours: "11:00 AM - 9:30 PM",
   googleMapsEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.8924379899175!2d121.93922887588267!3d10.742777989403847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33ae5cc4d8a14ff7%3A0x6b7fa918b958e0a8!2sSan%20Jose%20de%20Buenavista%2C%20Antique!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph",
+    "https://maps.google.com/maps?q=10.74189637279932,121.93939029205245&hl=en&z=17&output=embed",
+  branches: STORE_BRANCHES,
 };
 
 export const MENU_CATEGORIES: CategoryInfo[] = [

@@ -139,30 +139,51 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-display font-bold text-base mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-pak-yellow"></span>
-              Store Hours & Dine-in
+              Branches & Hours
             </h3>
-            <ul className="space-y-3 text-sm text-zinc-400">
+            <ul className="space-y-3.5 text-sm text-zinc-400">
               <li className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 text-pak-yellow mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-pak-yellow mt-0.5 shrink-0" />
                 <div>
-                  <span className="text-white font-semibold block">Opening Hours:</span>
-                  <span>10:00 AM - 9:00 PM Daily</span>
-                  <span className="block text-xs text-zinc-400">Dine-in & Samgyupsal until 9:30 PM</span>
+                  <span className="text-white font-semibold block text-xs">San Jose (Main Branch):</span>
+                  <span className="text-xs">San Jose de Buenavista, 5700 Antique</span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10.74189637279932,121.93939029205245"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[11px] text-pak-yellow hover:underline mt-0.5"
+                  >
+                    📍 Map Pin (10.741896, 121.939390)
+                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-pak-yellow mt-0.5 shrink-0" />
                 <div>
-                  <span className="text-white font-semibold block">Location:</span>
-                  <span>{STORE_INFO.fullAddress}</span>
-                  <span className="block text-xs text-zinc-400">{STORE_INFO.landmark}</span>
+                  <span className="text-white font-semibold block text-xs">Sibalom Branch:</span>
+                  <span className="text-xs">Sibalom, 5701 Antique</span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10.786897358232114,122.01643319435914"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[11px] text-pak-yellow hover:underline mt-0.5"
+                  >
+                    📍 Map Pin (10.786897, 122.016433)
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Clock className="w-4 h-4 text-pak-yellow mt-0.5 shrink-0" />
+                <div>
+                  <span className="text-white font-semibold block text-xs">Store Hours:</span>
+                  <span className="text-xs">10:00 AM - 9:00 PM Daily (Samgyup to 9:30 PM)</span>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-pak-yellow mt-0.5 shrink-0" />
                 <div>
-                  <span className="text-white font-semibold block">Mobile Hotline:</span>
-                  <a href={`tel:${STORE_INFO.contactNumber}`} className="text-pak-yellow hover:underline">
+                  <span className="text-white font-semibold block text-xs">Mobile Hotline:</span>
+                  <a href={`tel:${STORE_INFO.contactNumber}`} className="text-pak-yellow hover:underline text-xs">
                     {STORE_INFO.contactNumber}
                   </a>
                 </div>
@@ -170,33 +191,43 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect & Authentic Menu */}
+          {/* Connect & Social Channels */}
           <div>
             <h3 className="text-white font-display font-bold text-base mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-pak-yellow"></span>
-              Connect with Us
+              Follow on Facebook
             </h3>
-            <p className="text-sm text-zinc-400 mb-3">
-              Follow our social channels for daily promos, new meal launches, and holiday barkada discounts!
+            <p className="text-xs text-zinc-400 mb-3 leading-relaxed">
+              Follow our official Facebook pages for daily promos, holiday announcements & menu drops:
             </p>
 
             <div className="flex flex-col gap-2">
               <a
-                href={STORE_INFO.facebookUrl}
+                href="https://www.facebook.com/pork.ever"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
               >
-                <Share2 className="w-4 h-4 text-pak-yellow" />
-                <span>Follow Pak na Pak on Facebook</span>
+                <Share2 className="w-4 h-4 text-pak-yellow shrink-0" />
+                <span>San Jose FB (@pork.ever)</span>
+              </a>
+
+              <a
+                href="https://www.facebook.com/profile.php?id=61594810508350"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
+              >
+                <Share2 className="w-4 h-4 text-pak-yellow shrink-0" />
+                <span>Sibalom FB (Official Page)</span>
               </a>
 
               <button
                 onClick={() => openScanModal(0)}
-                className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-pak-yellow text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer text-left"
+                className="inline-flex items-center gap-2 bg-zinc-850 hover:bg-zinc-750 text-pak-yellow text-xs font-bold py-2 px-3 rounded-xl transition-colors cursor-pointer text-left mt-1 border border-zinc-700"
               >
-                <FileText className="w-4 h-4" />
-                <span>View Real Printed Menu Cards</span>
+                <FileText className="w-4 h-4 shrink-0" />
+                <span>View Original Menu Cards</span>
               </button>
             </div>
           </div>

@@ -97,6 +97,30 @@ export interface CartItem {
   image: string;
 }
 
+export interface BranchInfo {
+  id: "san-jose" | "sibalom";
+  name: string;
+  town: string;
+  tagline: string;
+  badge: string;
+  fullAddress: string;
+  landmark: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+    str: string;
+  };
+  facebookUrl: string;
+  facebookHandle: string;
+  messengerUrl: string;
+  googleMapsUrl: string;
+  googleMapsEmbedUrl: string;
+  openingHours: string;
+  operatingDays: string;
+  samgyupHours: string;
+  contactNumber: string;
+}
+
 export interface StoreInfo {
   name: string;
   tagline: string;
@@ -110,6 +134,7 @@ export interface StoreInfo {
   operatingDays: string;
   samgyupHours: string;
   googleMapsEmbedUrl: string;
+  branches?: BranchInfo[];
 }
 
 export interface PromoBanner {
