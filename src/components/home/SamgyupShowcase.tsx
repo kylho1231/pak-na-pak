@@ -45,8 +45,8 @@ export default function SamgyupShowcase() {
   const currentSet = SAMGYUP_SETS[selectedSetIndex];
 
   return (
-    <section id="samgyup" className="py-16 sm:py-20 bg-pak-cream relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="samgyup" className="py-16 sm:py-20 bg-pak-cream relative w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-900 bg-amber-200 px-3.5 py-1 rounded-full">

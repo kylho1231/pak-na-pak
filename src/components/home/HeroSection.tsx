@@ -22,22 +22,22 @@ export default function HeroSection() {
   const { openScanModal, addToCart, openDeliveryModal } = useCart();
 
   return (
-    <section className="relative bg-pak-black text-white overflow-hidden pt-8 pb-16 lg:py-20 border-b border-zinc-800">
+    <section className="relative bg-pak-black text-white overflow-hidden pt-8 pb-16 lg:py-20 border-b border-zinc-800 w-full max-w-full">
       {/* Background Glows and Food Pattern */}
       <div className="absolute inset-0 bg-food-pattern opacity-70 pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-pak-yellow/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-80 h-80 bg-amber-600/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Text Column (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             {/* Location & Status Tag */}
             <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 bg-zinc-900 border border-pak-yellow/30 px-3.5 py-1.5 rounded-full text-xs font-bold text-zinc-200 max-w-full">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-              <span className="text-pak-yellow whitespace-nowrap">Now Serving in San Jose, Antique</span>
+              <span className="text-pak-yellow">Now Serving in San Jose, Antique</span>
               <span className="text-zinc-600 hidden xs:inline">•</span>
-              <span className="text-zinc-400 whitespace-nowrap">Dine-In, Take-Out & Delivery</span>
+              <span className="text-zinc-400">Dine-In, Take-Out &amp; Delivery</span>
             </div>
 
             {/* Main Punchy Headlines */}

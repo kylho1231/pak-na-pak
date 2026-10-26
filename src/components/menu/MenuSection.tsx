@@ -64,8 +64,8 @@ export default function MenuSection() {
   }, [menuItems, activeCategory, searchQuery, priceFilter]);
 
   return (
-    <section id="menu" className="py-16 sm:py-20 bg-zinc-50 border-t border-zinc-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="menu" className="py-16 sm:py-20 bg-zinc-50 border-t border-zinc-200 w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-pak-black bg-pak-yellow px-3.5 py-1 rounded-full shadow-xs">
@@ -114,8 +114,8 @@ export default function MenuSection() {
           </div>
 
           {/* Quick Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
-            <span className="text-xs font-bold text-zinc-500 hidden sm:inline">Filter:</span>
+          <div className="flex items-center gap-2 overflow-x-auto w-full min-w-0 max-w-full pb-1 md:pb-0 no-scrollbar">
+            <span className="text-xs font-bold text-zinc-500 hidden sm:inline shrink-0">Filter:</span>
             {[
               { id: "all", label: "All Items" },
               { id: "under-100", label: "🔥 ₱99 Sulit Zone" },
@@ -139,8 +139,8 @@ export default function MenuSection() {
         </div>
 
         {/* Horizontal Category Navigation Bar */}
-        <div className="sticky top-[68px] z-20 bg-zinc-50/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 mb-8 border-y border-zinc-200/80">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+        <div className="sticky top-[68px] z-20 bg-zinc-50/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 mb-8 border-y border-zinc-200/80 w-[calc(100%+2rem)] max-w-[calc(100%+2rem)] overflow-hidden">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth w-full min-w-0 max-w-full">
             {MENU_CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (

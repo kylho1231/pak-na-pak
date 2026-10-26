@@ -27,10 +27,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow pb-24 md:pb-0">
+    <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow pb-24 md:pb-0 w-full max-w-full overflow-hidden">
       {/* Pre-Footer Action Banner */}
-      <div className="bg-gradient-to-r from-amber-500 via-pak-yellow to-amber-400 text-pak-black py-10 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div className="bg-gradient-to-r from-amber-500 via-pak-yellow to-amber-400 text-pak-black py-10 px-4 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left w-full">
           <div>
             <span className="inline-block bg-pak-black text-pak-yellow text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-full mb-2">
               Ready to eat?

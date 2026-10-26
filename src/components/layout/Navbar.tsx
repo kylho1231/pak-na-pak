@@ -58,14 +58,14 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full max-w-full overflow-hidden transition-all duration-300">
       {/* Top Notification Strip */}
-      <div className="bg-pak-black text-white text-xs font-medium py-1.5 px-4 border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 text-pak-yellow font-semibold whitespace-nowrap">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Open Now in San Jose, Antique
+      <div className="bg-pak-black text-white text-xs font-medium py-1.5 px-2.5 sm:px-4 border-b border-zinc-800 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <span className="inline-flex items-center gap-1.5 text-pak-yellow font-semibold text-[11px] sm:text-xs truncate">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+              <span className="truncate">Open Now in San Jose, Antique</span>
             </span>
             <span className="hidden md:inline text-zinc-500">|</span>
             <span className="hidden md:inline-flex items-center gap-1 text-zinc-300 whitespace-nowrap">
@@ -74,13 +74,13 @@ export default function Navbar() {
             </span>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button
               onClick={() => openScanModal(0)}
-              className="text-pak-yellow hover:text-white transition-colors flex items-center gap-1 text-xs cursor-pointer font-medium whitespace-nowrap"
+              className="text-pak-yellow hover:text-white transition-colors flex items-center gap-1 text-[11px] sm:text-xs cursor-pointer font-medium whitespace-nowrap"
               aria-label="View original physical menu scans"
             >
-              <FileText className="w-3.5 h-3.5" />
+              <FileText className="w-3.5 h-3.5 shrink-0" />
               <span className="underline underline-offset-2">Original Menu Scans</span>
             </button>
             <span className="text-zinc-700 hidden sm:inline">|</span>
@@ -97,13 +97,13 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <nav
-        className={`w-full transition-all duration-300 ${
+        className={`w-full max-w-full overflow-hidden transition-all duration-300 ${
           isScrolled
             ? "bg-pak-black/95 backdrop-blur-md text-white shadow-xl border-b border-pak-yellow/20 py-2.5"
             : "bg-pak-black text-white py-3.5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Logo */}
           <Link
             href="/"

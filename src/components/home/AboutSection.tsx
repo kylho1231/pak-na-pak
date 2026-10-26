@@ -16,8 +16,8 @@ import { STORE_INFO } from "@/data/storeData";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-16 sm:py-20 bg-white relative overflow-hidden border-t border-zinc-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-16 sm:py-20 bg-white relative overflow-hidden border-t border-zinc-200 w-full max-w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Image Collage (5 cols) */}
           <div className="lg:col-span-5 relative">

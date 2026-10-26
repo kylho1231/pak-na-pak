@@ -113,7 +113,7 @@ export default function PakAiAssistant() {
         type="button"
         onClick={() => setIsOpen(true)}
         aria-label="Open Pak AI Food Assistant"
-        className="fixed bottom-24 right-5 sm:bottom-28 sm:right-6 z-40 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold px-4 py-3 rounded-full shadow-2xl border-2 border-black flex items-center gap-2.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-black"
+        className="fixed bottom-20 right-3 sm:bottom-28 sm:right-6 z-30 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold px-3 sm:px-4 py-2.5 sm:py-3 rounded-full shadow-2xl border-2 border-black flex items-center gap-2 sm:gap-2.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-black"
       >
         <div className="relative">
           <Bot className="w-5 h-5 text-pak-black stroke-[2.5]" />

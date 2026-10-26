@@ -10,10 +10,10 @@ export default function PromoSection() {
   const { openScanModal } = useCart();
 
   return (
-    <section id="promos" className="py-16 sm:py-20 bg-pak-black text-white relative overflow-hidden">
+    <section id="promos" className="py-16 sm:py-20 bg-pak-black text-white relative overflow-hidden w-full max-w-full">
       <div className="absolute inset-0 bg-food-pattern opacity-30 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-pak-black bg-pak-yellow px-3.5 py-1 rounded-full">

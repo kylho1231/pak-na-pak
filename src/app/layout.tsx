@@ -31,7 +31,8 @@ export const viewport: Viewport = {
   themeColor: "#FFC700",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export const metadata: Metadata = {
@@ -78,13 +79,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${plusJakarta.variable} scroll-smooth`}
+      className={`${montserrat.variable} ${plusJakarta.variable} scroll-smooth w-full max-w-full overflow-x-hidden`}
     >
-      <body className="min-h-screen bg-pak-cream text-pak-black font-body antialiased flex flex-col selection:bg-pak-yellow selection:text-pak-black">
+      <body className="min-h-screen bg-pak-cream text-pak-black font-body antialiased flex flex-col selection:bg-pak-yellow selection:text-pak-black w-full max-w-full overflow-x-hidden relative">
         <AdminProvider>
           <CartProvider>
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
             <Footer />
             <StickyMobileBar />
             <OrderDrawer />

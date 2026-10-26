@@ -281,8 +281,8 @@ export default function LocationSection() {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-pak-cream relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 sm:py-20 bg-pak-cream relative w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-200/70 px-3.5 py-1 rounded-full">
@@ -460,9 +460,9 @@ export default function LocationSection() {
               />
 
               {/* Floating Pin Coordinates Pill */}
-              <div className="absolute top-3 left-3 bg-black/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-zinc-700 text-[11px] font-bold text-white flex items-center gap-2 shadow">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span>
+              <div className="absolute top-3 left-3 bg-black/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-zinc-700 text-[11px] font-bold text-white flex items-center gap-2 shadow max-w-[85%] truncate">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+                <span className="truncate">
                   Pinned: {currentBranch.town} ({currentBranch.coordinates.str})
                 </span>
               </div>
@@ -472,7 +472,7 @@ export default function LocationSection() {
                 href={currentBranch.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-zinc-900 text-xs font-black px-3 py-1.5 rounded-xl shadow-lg border border-zinc-200 flex items-center gap-1.5 cursor-pointer transition-transform hover:scale-105"
+                className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-zinc-900 text-xs font-black px-3 py-1.5 rounded-xl shadow-lg border border-zinc-200 flex items-center gap-1.5 cursor-pointer transition-transform hover:scale-105 max-w-[85%] truncate"
               >
                 <span>Open in Google Maps App</span>
                 <ExternalLink className="w-3.5 h-3.5 text-zinc-600" />

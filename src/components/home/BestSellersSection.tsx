@@ -40,8 +40,8 @@ export default function BestSellersSection() {
   };
 
   return (
-    <section id="bestsellers" className="py-16 sm:py-20 bg-pak-cream relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="bestsellers" className="py-16 sm:py-20 bg-pak-cream relative w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 text-center md:text-left">
           <div>
