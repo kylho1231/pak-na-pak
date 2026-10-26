@@ -145,3 +145,106 @@ export interface ReservationFormData {
   occasion: string;
   specialRequests?: string;
 }
+
+// -------------------------------------------------------------
+// REST API CONTRACTS & ENVELOPES (api-design & api-and-interface-design)
+// -------------------------------------------------------------
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T | null;
+  error: {
+    code: string;
+    message: string;
+    details?: unknown;
+  } | null;
+  meta?: {
+    page?: number;
+    limit?: number;
+    total?: number;
+    timestamp: string;
+  };
+}
+
+export interface AiRecommendationRequest {
+  query: string;
+  budget?: number;
+  pax?: number;
+  preferences?: string[];
+  diningType?: "delivery" | "dine-in";
+}
+
+export interface AiRecommendedMeal {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  quantity: number;
+  portion?: string;
+  flavor?: string;
+  image: string;
+  reason: string;
+}
+
+export interface AiRecommendationResult {
+  headline: string;
+  tagline: string;
+  summary: string;
+  recommendedMeals: AiRecommendedMeal[];
+  totalPrice: number;
+  budget?: number;
+  savingsNote?: string;
+  recommendedCourier: {
+    id: string;
+    name: string;
+    url: string;
+    tip: string;
+  };
+  disclaimer: string;
+}
+
+export interface AnalyticsKpi {
+  id: string;
+  label: string;
+  value: string;
+  change: string;
+  isPositive: boolean;
+  period: string;
+}
+
+export interface SalesCategoryMetric {
+  category: string;
+  percentage: number;
+  revenue: number;
+  orderCount: number;
+  colorHex: string;
+}
+
+export interface HourlyOrderMetric {
+  hour: string;
+  orders: number;
+  peak: boolean;
+}
+
+export interface CourierDispatchMetric {
+  name: string;
+  sharePercentage: number;
+  totalTrips: number;
+  avgDeliveryMinutes: number;
+  status: "active" | "busy";
+}
+
+export interface AnalyticsDashboardData {
+  kpis: AnalyticsKpi[];
+  categoryMetrics: SalesCategoryMetric[];
+  hourlyTraffic: HourlyOrderMetric[];
+  courierDispatches: CourierDispatchMetric[];
+  recentSimulatedOrders: {
+    id: string;
+    customer: string;
+    items: string;
+    total: number;
+    courier: string;
+    timeAgo: string;
+    status: "Delivered" | "Dispatched" | "Preparing";
+  }[];
+}

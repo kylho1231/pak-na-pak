@@ -10,6 +10,7 @@ import OrderDrawer from "@/components/order/OrderDrawer";
 import MenuScanModal from "@/components/menu/MenuScanModal";
 import AdminModal from "@/components/admin/AdminModal";
 import DeliveryRidersModal from "@/components/delivery/DeliveryRidersModal";
+import PakAiAssistant from "@/components/ai/PakAiAssistant";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
             <DeliveryRidersModal />
             <MenuScanModal />
             <AdminModal />
+            <PakAiAssistant />
           </CartProvider>
         </AdminProvider>
       </body>

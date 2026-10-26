@@ -621,3 +621,5 @@ export const INITIAL_MENU_ITEMS: MenuItem[] = [
     image: "/dishes/drinks-and-soju.jpg",
   },
 ];
+
+export const MENU_ITEMS = INITIAL_MENU_ITEMS;

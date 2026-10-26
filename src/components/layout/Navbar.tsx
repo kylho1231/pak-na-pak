@@ -14,6 +14,7 @@ import {
   MapPin,
   Flame,
   Bike,
+  BarChart3,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
@@ -128,6 +129,16 @@ export default function Navbar() {
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Store Analytics / Data App */}
+            <Link
+              href="/dashboard"
+              className="hidden xl:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-bold px-2.5 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              title="View Store Analytics & Inventory Dashboard"
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-pak-yellow" />
+              <span>Data App</span>
+            </Link>
+
             {/* Direct Delivery Riders Contact */}
             <button
               onClick={() => openDeliveryModal()}
@@ -197,6 +208,20 @@ export default function Navbar() {
               ))}
 
               <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-bold py-2.5 px-4 rounded-xl cursor-pointer"
+                >
+                  <span className="flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4 text-pak-yellow" />
+                    <span>Store Intelligence Dashboard</span>
+                  </span>
+                  <span className="text-[10px] bg-pak-yellow text-pak-black px-1.5 py-0.5 rounded font-black uppercase">
+                    Data App
+                  </span>
+                </Link>
+
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
