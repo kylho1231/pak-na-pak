@@ -15,11 +15,9 @@ import {
 } from "lucide-react";
 import { STORE_INFO } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
-import { useAdmin } from "@/context/AdminContext";
 
 export default function Footer() {
   const { openScanModal } = useCart();
-  const { setIsAdminOpen } = useAdmin();
 
   return (
     <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow">
@@ -233,7 +231,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Copyright & Admin Trigger */}
+        {/* Bottom Copyright */}
         <div className="border-t border-zinc-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
           <p className="flex items-center gap-1">
             © 2026 Pak na Pak Restaurant. Proudly serving San Jose, Antique.
@@ -243,14 +241,6 @@ export default function Footer() {
             <span className="flex items-center gap-1">
               Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Antiqueños
             </span>
-            <span className="text-zinc-600">|</span>
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="text-zinc-400 hover:text-pak-yellow transition-colors underline cursor-pointer text-xs"
-              aria-label="Open Store Menu Editor"
-            >
-              Menu Admin / Editor
-            </button>
           </div>
         </div>
       </div>

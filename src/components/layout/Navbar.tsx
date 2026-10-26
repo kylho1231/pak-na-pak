@@ -14,7 +14,6 @@ import {
   MapPin,
   Flame,
   Bike,
-  BarChart3,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
@@ -70,15 +69,6 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            <Link
-              href="/dashboard"
-              className="text-zinc-300 hover:text-pak-yellow transition-colors flex items-center gap-1.5 text-xs cursor-pointer font-medium whitespace-nowrap"
-              title="Store Analytics & Inventory Management"
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-pak-yellow" />
-              <span>Store Data App</span>
-            </Link>
-            <span className="text-zinc-700 hidden sm:inline">|</span>
             <button
               onClick={() => openScanModal(0)}
               className="text-pak-yellow hover:text-white transition-colors flex items-center gap-1 text-xs cursor-pointer font-medium whitespace-nowrap"
@@ -215,20 +205,6 @@ export default function Navbar() {
               ))}
 
               <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2">
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-bold py-2.5 px-4 rounded-xl cursor-pointer"
-                >
-                  <span className="flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-pak-yellow" />
-                    <span>Store Intelligence Dashboard</span>
-                  </span>
-                  <span className="text-[10px] bg-pak-yellow text-pak-black px-1.5 py-0.5 rounded font-black uppercase">
-                    Data App
-                  </span>
-                </Link>
-
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);

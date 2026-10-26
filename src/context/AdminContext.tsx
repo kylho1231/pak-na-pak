@@ -47,9 +47,25 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       if (isAuth === "true") {
         setIsAdminLoggedIn(true);
       }
+      // Check secret ?admin=true query parameter
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("admin") === "true") {
+        setIsAdminOpen(true);
+      }
     } catch {
       // Ignore
     }
+
+    // Secret owner shortcut: Ctrl+Shift+A or Alt+Shift+A opens the admin menu privately
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.altKey) && e.shiftKey && (e.key === "A" || e.key === "a")) {
+        e.preventDefault();
+        setIsAdminOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   // Save menu changes
