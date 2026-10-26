@@ -169,6 +169,28 @@ export interface ReservationFormData {
   time: string;
   occasion: string;
   specialRequests?: string;
+  governmentIdFile?: string;
+}
+
+export interface TableReservationRecord {
+  id: string;
+  referenceCode: string;
+  branchId: "san-jose" | "sibalom";
+  branchName: string;
+  fullName: string;
+  phone: string;
+  email?: string;
+  partySize: string;
+  date: string;
+  time: string;
+  diningType: string;
+  notes?: string;
+  idFileName: string;
+  idFileSize?: string;
+  idFileDataUrl?: string; // base64 preview of uploaded Government ID
+  idType?: string;
+  status: "pending" | "confirmed" | "seated" | "cancelled";
+  createdAt: string;
 }
 
 // -------------------------------------------------------------

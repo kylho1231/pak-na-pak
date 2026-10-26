@@ -14,6 +14,7 @@ import {
   MapPin,
   Flame,
   Bike,
+  Calendar,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
@@ -22,7 +23,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { cartCount, cartTotal, setIsCartOpen, openScanModal, openDeliveryModal } = useCart();
+  const { cartCount, cartTotal, setIsCartOpen, openScanModal, openDeliveryModal, openReservationModal } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -141,6 +142,16 @@ export default function Navbar() {
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Table Reservation Button */}
+            <button
+              onClick={() => openReservationModal()}
+              className="hidden lg:inline-flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-pak-yellow text-xs font-extrabold px-3 py-2.5 rounded-xl transition-colors cursor-pointer border border-amber-500/40 hover:border-pak-yellow whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              aria-label="Reserve a Table (Government ID Required)"
+            >
+              <Calendar className="w-3.5 h-3.5 stroke-[2.4]" />
+              <span>Reserve Table</span>
+            </button>
+
             {/* Direct Delivery Riders Contact */}
             <button
               onClick={() => openDeliveryModal()}
@@ -210,6 +221,17 @@ export default function Navbar() {
               ))}
 
               <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    openReservationModal();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 text-pak-yellow font-extrabold py-2.5 px-4 rounded-xl border border-amber-500/40 cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Reserve a Table (ID Required)</span>
+                </button>
+
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);

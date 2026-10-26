@@ -11,6 +11,7 @@ import {
   Plus,
   MessageCircle,
   ShieldAlert,
+  Calendar,
 } from "lucide-react";
 import { SAMGYUP_SETS, STORE_INFO } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
@@ -39,7 +40,7 @@ const SAMGYUP_PHOTOS = [
 export default function SamgyupShowcase() {
   const [selectedSetIndex, setSelectedSetIndex] = useState(1); // Set B default
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
-  const { openScanModal, addToCart } = useCart();
+  const { openScanModal, addToCart, openReservationModal } = useCart();
 
   const currentSet = SAMGYUP_SETS[selectedSetIndex];
 
@@ -267,17 +268,16 @@ export default function SamgyupShowcase() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
-                <a
-                  href={`${STORE_INFO.messengerUrl}?text=${encodeURIComponent(
-                    `Hi Pak na Pak Antique! Mag-iinquire po sana kami for Samgyupsal ${currentSet.code} table reservation.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={() =>
+                    openReservationModal("san-jose", `Unlimited Samgyupsal ${currentSet.code}`)
+                  }
                   className="flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow cursor-pointer transition-transform active:scale-98"
                 >
-                  <MessageCircle className="w-4 h-4 fill-pak-black" />
-                  <span>Inquire / Book Table</span>
-                </a>
+                  <Calendar className="w-4 h-4 stroke-[2.3]" />
+                  <span>Reserve Table &amp; Verify ID</span>
+                </button>
 
                 <button
                   type="button"

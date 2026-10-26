@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   ExternalLink,
   RefreshCw,
+  Calendar,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useCart, DeliveryLiveLocation } from "@/context/CartContext";
@@ -38,6 +39,7 @@ export default function OrderDrawer() {
     cartTotal,
     cartCount,
     openDeliveryModal,
+    openReservationModal,
   } = useCart();
 
   const [orderType, setOrderType] = useState<"dine-in" | "take-out" | "delivery">("delivery");
@@ -543,6 +545,35 @@ export default function OrderDrawer() {
                         {locationError}
                       </p>
                     )}
+                  </div>
+                )}
+
+                {/* Dine-In Advance Table Reservation Notice */}
+                {orderType === "dine-in" && (
+                  <div className="p-3 bg-amber-50/90 border border-amber-200 rounded-xl space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-black uppercase tracking-wide text-zinc-800 flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5 text-amber-700" />
+                        Table Reservation
+                      </span>
+                      <span className="text-[10px] text-amber-900 font-bold bg-amber-200/80 px-2 py-0.5 rounded-full">
+                        Govt ID Required
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-zinc-600">
+                      Planning to dine in? Secure your table in advance at San Jose or Sibalom with our quick reservation &amp; ID verification!
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsCartOpen(false);
+                        openReservationModal();
+                      }}
+                      className="w-full flex items-center justify-center gap-1.5 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black text-xs font-black py-2.5 px-3 rounded-lg shadow-xs cursor-pointer transition-colors"
+                    >
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>Reserve Table &amp; Upload Government ID</span>
+                    </button>
                   </div>
                 )}
 

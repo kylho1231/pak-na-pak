@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import Image from "next/image";
 import {
   MapPin,
   Clock,
@@ -17,10 +18,17 @@ import {
   Navigation,
   MessageSquare,
   Share2,
+  IdCard,
+  Upload,
+  CheckCircle2,
+  AlertCircle,
+  Trash2,
+  ShieldCheck,
 } from "lucide-react";
 import confetti from "canvas-confetti";
+import { useCart } from "@/context/CartContext";
 import { STORE_BRANCHES, STORE_INFO } from "@/data/storeData";
-import { BranchInfo } from "@/types";
+import { BranchInfo, TableReservationRecord } from "@/types";
 
 interface CustomerReview {
   id: string;
@@ -91,6 +99,8 @@ export default function LocationSection() {
   const [reviewsList, setReviewsList] = useState<CustomerReview[]>(INITIAL_REVIEWS);
   const [isRatingSubmitted, setIsRatingSubmitted] = useState(false);
 
+  const { openReservationModal } = useCart();
+
   // Table Reservation Form State
   const [formData, setFormData] = useState({
     fullName: "",
@@ -102,6 +112,49 @@ export default function LocationSection() {
     notes: "",
   });
   const [isReserveSubmitted, setIsReserveSubmitted] = useState(false);
+  const [reservationRefCode, setReservationRefCode] = useState("");
+
+  // Government ID upload state for inline form
+  const [idFile, setIdFile] = useState<File | null>(null);
+  const [idPreviewUrl, setIdPreviewUrl] = useState<string | null>(null);
+  const [idFileName, setIdFileName] = useState("");
+  const [idFileSize, setIdFileSize] = useState("");
+  const [idType, setIdType] = useState("Philippine National ID (PhilSys)");
+  const [idError, setIdError] = useState<string | null>(null);
+  const inlineFileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleInlineFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIdError(null);
+    if (file.size > 8 * 1024 * 1024) {
+      setIdError("File size is too large (max 8MB). Please choose a smaller photo.");
+      return;
+    }
+
+    setIdFile(file);
+    setIdFileName(file.name);
+    const sizeKb = Math.round(file.size / 1024);
+    setIdFileSize(sizeKb > 1000 ? `${(sizeKb / 1024).toFixed(1)} MB` : `${sizeKb} KB`);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setIdPreviewUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveInlineId = () => {
+    setIdFile(null);
+    setIdPreviewUrl(null);
+    setIdFileName("");
+    setIdFileSize("");
+    setIdError(null);
+    if (inlineFileInputRef.current) {
+      inlineFileInputRef.current.value = "";
+    }
+  };
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -152,6 +205,12 @@ export default function LocationSection() {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
+    // MANDATORY ID CHECK
+    if (!idPreviewUrl) {
+      setIdError("⚠️ Government ID is strictly required to secure your table reservation. Please upload your ID below.");
+      return;
+    }
+
     try {
       confetti({
         particleCount: 60,
@@ -163,10 +222,45 @@ export default function LocationSection() {
       // Ignore
     }
 
+    const ref = `PAK-RES-${selectedBranchId === "san-jose" ? "SJ" : "SIB"}-${Math.floor(
+      1000 + Math.random() * 9000
+    )}`;
+    setReservationRefCode(ref);
+
+    const newRecord: TableReservationRecord = {
+      id: `res-${Date.now()}`,
+      referenceCode: ref,
+      branchId: selectedBranchId,
+      branchName: currentBranch.name,
+      fullName: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      partySize: `${formData.partySize} Persons`,
+      date: formData.date || new Date().toISOString().split("T")[0],
+      time: formData.time,
+      diningType: formData.diningType,
+      notes: formData.notes.trim() || undefined,
+      idFileName: idFileName || "Government_ID.jpg",
+      idFileSize,
+      idFileDataUrl: idPreviewUrl,
+      idType,
+      status: "pending",
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const existing = localStorage.getItem("pak_reservations_v1");
+      const list: TableReservationRecord[] = existing ? JSON.parse(existing) : [];
+      list.unshift(newRecord);
+      localStorage.setItem("pak_reservations_v1", JSON.stringify(list));
+    } catch {
+      // Ignore
+    }
+
     setIsReserveSubmitted(true);
 
     const msg = `👋 Hello Pak na Pak ${currentBranch.name}! Mag-iinquire po sana ako for table reservation:
 📍 Branch: ${currentBranch.name}
+🔖 Ref Code: ${ref}
 👤 Name: ${formData.fullName}
 📱 Contact: ${formData.phone}
 👥 Party Size: ${formData.partySize} pax
@@ -178,7 +272,8 @@ export default function LocationSection() {
         ? "Unlimited Chicken & Rice Feast"
         : "Ala Carte / Barkada Salo-Salo"
     }
-📝 Notes: ${formData.notes || "None"}`;
+📝 Notes: ${formData.notes || "None"}
+🆔 Government ID: Uploaded & Verified (${idType} - ${idFileName})`;
 
     setTimeout(() => {
       window.open(`${currentBranch.messengerUrl}?text=${encodeURIComponent(msg)}`, "_blank");
@@ -651,35 +746,63 @@ export default function LocationSection() {
                 </div>
 
                 {isReserveSubmitted ? (
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center space-y-3 animate-fadeIn">
-                    <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                      <Check className="w-6 h-6 stroke-[3]" />
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center space-y-3.5 animate-fadeIn">
+                    <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
+                      <Check className="w-7 h-7 stroke-[3]" />
                     </div>
-                    <h4 className="font-display font-black text-lg text-emerald-900">
-                      Inquiry Sent to {currentBranch.town}!
-                    </h4>
-                    <p className="text-xs text-emerald-700 max-w-sm mx-auto">
-                      Opening Messenger to confirm with {currentBranch.name}. Thank you, {formData.fullName}!
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setIsReserveSubmitted(false)}
-                      className="text-xs font-bold text-emerald-800 underline cursor-pointer pt-2"
-                    >
-                      Send another reservation
-                    </button>
+                    <div>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2.5 py-0.5 rounded-full mb-1">
+                        <ShieldCheck className="w-3 h-3 text-emerald-700" />
+                        Government ID Verified
+                      </span>
+                      <h4 className="font-display font-black text-xl text-emerald-950">
+                        Reservation Inquiry Sent!
+                      </h4>
+                      <p className="text-xs text-emerald-800 max-w-sm mx-auto mt-0.5">
+                        Opening Messenger to confirm with {currentBranch.name}. Thank you, {formData.fullName}!
+                      </p>
+                      {reservationRefCode && (
+                        <div className="inline-block bg-zinc-900 text-pak-yellow font-mono font-black text-xs px-3 py-1 rounded-lg mt-2">
+                          Ref: {reservationRefCode}
+                        </div>
+                      )}
+                    </div>
+
+                    {idPreviewUrl && (
+                      <div className="bg-white p-2.5 rounded-xl border border-emerald-200 flex items-center justify-between text-xs max-w-xs mx-auto">
+                        <span className="text-[11px] font-bold text-zinc-600 truncate">
+                          {idFileName}
+                        </span>
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-zinc-200 shrink-0">
+                          <Image src={idPreviewUrl} alt="ID" fill className="object-cover" />
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsReserveSubmitted(false);
+                          handleRemoveInlineId();
+                        }}
+                        className="text-xs font-bold text-emerald-800 underline cursor-pointer"
+                      >
+                        Send another reservation
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleReserveSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <div className="space-y-1">
                         <label className="text-xs font-bold text-zinc-700 block">
-                          Full Name *
+                          Full Name (Matching Government ID) *
                         </label>
                         <input
                           type="text"
                           required
-                          placeholder="e.g. Juan dela Cruz"
+                          placeholder="e.g. Maria Santos dela Cruz"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                           className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-zinc-300 bg-zinc-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pak-yellow text-zinc-900"
@@ -721,10 +844,12 @@ export default function LocationSection() {
 
                       <div className="space-y-1">
                         <label className="text-xs font-bold text-zinc-700 block">
-                          Preferred Date
+                          Preferred Date *
                         </label>
                         <input
                           type="date"
+                          required
+                          min={new Date().toISOString().split("T")[0]}
                           value={formData.date}
                           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                           className="w-full text-xs px-3 py-2.5 rounded-xl border border-zinc-300 bg-zinc-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pak-yellow text-zinc-900"
@@ -733,10 +858,11 @@ export default function LocationSection() {
 
                       <div className="space-y-1">
                         <label className="text-xs font-bold text-zinc-700 block">
-                          Time
+                          Time *
                         </label>
                         <input
                           type="time"
+                          required
                           value={formData.time}
                           onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                           className="w-full text-xs px-3 py-2.5 rounded-xl border border-zinc-300 bg-zinc-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-pak-yellow text-zinc-900"
@@ -775,7 +901,7 @@ export default function LocationSection() {
                         Special Requests / Celebration Notes
                       </label>
                       <textarea
-                        rows={3}
+                        rows={2}
                         placeholder="e.g. Birthday celebration, please prepare high chair, or request corner table..."
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -783,12 +909,89 @@ export default function LocationSection() {
                       />
                     </div>
 
+                    {/* Government ID Upload Section */}
+                    <div className="p-3.5 bg-amber-50/70 border border-amber-200 rounded-2xl space-y-2.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <IdCard className="w-4 h-4 text-amber-600" />
+                          <span className="text-xs font-black uppercase tracking-wider text-zinc-900">
+                            Upload Government ID (Required)
+                          </span>
+                        </div>
+                        {idPreviewUrl && (
+                          <span className="text-[10px] font-black uppercase text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            Attached
+                          </span>
+                        )}
+                      </div>
+
+                      <p className="text-[11px] text-zinc-500">
+                        PhilSys ID, Driver&apos;s License, Passport, UMID, Postal ID, or Voter&apos;s ID. Required to prevent bogus reservations.
+                      </p>
+
+                      {!idPreviewUrl ? (
+                        <div>
+                          <input
+                            ref={inlineFileInputRef}
+                            type="file"
+                            id="inline-id-upload"
+                            accept="image/jpeg,image/png,image/webp,application/pdf"
+                            onChange={handleInlineFileChange}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="inline-id-upload"
+                            className="border-2 border-dashed border-zinc-300 hover:border-pak-yellow bg-white rounded-xl p-3.5 flex flex-col items-center justify-center text-center cursor-pointer transition-colors group"
+                          >
+                            <Upload className="w-5 h-5 text-amber-600 mb-1 group-hover:scale-110 transition-transform" />
+                            <span className="text-xs font-bold text-zinc-800">
+                              Upload Government ID Photo
+                            </span>
+                            <span className="text-[10px] text-zinc-500">
+                              Click or tap to attach photo (Max 8MB)
+                            </span>
+                          </label>
+                        </div>
+                      ) : (
+                        <div className="bg-white p-2.5 rounded-xl border border-emerald-300 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <div className="relative w-10 h-8 rounded-lg overflow-hidden border border-zinc-200 shrink-0">
+                              <Image src={idPreviewUrl} alt="ID preview" fill className="object-cover" />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-xs font-bold text-zinc-900 truncate">
+                                {idFileName}
+                              </p>
+                              <span className="text-[10px] text-zinc-500">
+                                {idFileSize} • Verified
+                              </span>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleRemoveInlineId}
+                            className="p-1.5 rounded-lg hover:bg-rose-100 text-zinc-500 hover:text-rose-600 cursor-pointer"
+                            title="Remove ID"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      )}
+
+                      {idError && (
+                        <p className="text-[11px] text-rose-700 bg-rose-50 p-2 rounded-lg border border-rose-200 font-semibold">
+                          {idError}
+                        </p>
+                      )}
+                    </div>
+
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 bg-pak-black hover:bg-zinc-800 text-pak-yellow font-extrabold text-sm py-3.5 px-4 rounded-xl shadow-md transition-all cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 bg-pak-black hover:bg-zinc-800 text-pak-yellow font-extrabold text-sm py-3.5 px-4 rounded-xl shadow-md transition-all cursor-pointer min-h-[44px]"
                     >
                       <Send className="w-4 h-4 text-pak-yellow" />
-                      <span>Send Reservation to {currentBranch.town}</span>
+                      <span>Submit Table Reservation & Verify ID</span>
                     </button>
                   </form>
                 )}

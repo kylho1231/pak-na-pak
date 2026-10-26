@@ -61,6 +61,11 @@ interface CartContextType {
   deliveryPayload: DeliveryOrderPayload | null;
   openDeliveryModal: (payload?: DeliveryOrderPayload) => void;
   closeDeliveryModal: () => void;
+  // Table Reservation modal
+  isReservationModalOpen: boolean;
+  reservationPrefill: { branch?: "san-jose" | "sibalom"; diningType?: string } | null;
+  openReservationModal: (branch?: "san-jose" | "sibalom", diningType?: string) => void;
+  closeReservationModal: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -77,6 +82,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Delivery Riders modal state
   const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
   const [deliveryPayload, setDeliveryPayload] = useState<DeliveryOrderPayload | null>(null);
+
+  // Table Reservation modal state
+  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const [reservationPrefill, setReservationPrefill] = useState<{
+    branch?: "san-jose" | "sibalom";
+    diningType?: string;
+  } | null>(null);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -211,6 +223,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsDeliveryModalOpen(false);
   };
 
+  const openReservationModal = (branch?: "san-jose" | "sibalom", diningType?: string) => {
+    setReservationPrefill({ branch, diningType });
+    setIsReservationModalOpen(true);
+  };
+
+  const closeReservationModal = () => {
+    setIsReservationModalOpen(false);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -235,6 +256,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         deliveryPayload,
         openDeliveryModal,
         closeDeliveryModal,
+        isReservationModalOpen,
+        reservationPrefill,
+        openReservationModal,
+        closeReservationModal,
       }}
     >
       {children}
