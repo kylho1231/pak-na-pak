@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, Plus, Minus, Check, Flame, Bike, ShoppingBag, Sparkles } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { CHICKEN_FLAVORS_LIST } from "@/data/storeData";
+import { CHICKEN_FLAVORS_LIST, SUGO_PACKAGING_FEE } from "@/data/storeData";
 import { ChickenFlavorName } from "@/types";
 
 export default function ItemCustomizerModal() {
@@ -52,6 +52,7 @@ export default function ItemCustomizerModal() {
         },
       ],
       total: customizingItem.price * quantity,
+      packagingFee: SUGO_PACKAGING_FEE,
     });
     closeCustomizer();
   };
@@ -297,10 +298,13 @@ export default function ItemCustomizerModal() {
             <button
               type="button"
               onClick={handleOrderViaRider}
-              className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer min-h-[44px]"
+              className="w-full sm:flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-2.5 sm:py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer min-h-[44px]"
             >
-              <Bike className="w-4 h-4 stroke-[2.3]" />
-              <span>Order via Delivery Rider • ₱{totalPrice}</span>
+              <div className="flex items-center gap-1.5">
+                <Bike className="w-4 h-4 stroke-[2.3]" />
+                <span>Order via Delivery Rider • ₱{totalPrice + SUGO_PACKAGING_FEE}</span>
+              </div>
+              <span className="text-[10px] text-zinc-800 font-semibold">(Includes ₱5 SUGO container)</span>
             </button>
             <button
               type="button"

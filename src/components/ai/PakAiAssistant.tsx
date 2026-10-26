@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { AiRecommendationResult, AiRecommendedMeal } from "@/types";
 import { useCart } from "@/context/CartContext";
+import { SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 const QUICK_PROMPTS = [
   { label: "⚡ Sulit ₱100 Solo Meal", query: "Anong pinakasulit na solo lunch meal under ₱100?", budget: 100, pax: 1 },
@@ -101,6 +102,7 @@ export default function PakAiAssistant() {
         details: m.portion || m.flavor,
       })),
       total: res.totalPrice,
+      packagingFee: SUGO_PACKAGING_FEE,
     });
   };
 

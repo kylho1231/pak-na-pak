@@ -7,6 +7,7 @@ import { Flame, Bike, Sparkles, Star, ArrowRight } from "lucide-react";
 import { useAdmin } from "@/context/AdminContext";
 import { useCart } from "@/context/CartContext";
 import { MenuItem } from "@/types";
+import { SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 export default function BestSellersSection() {
   const { menuItems } = useAdmin();
@@ -33,6 +34,7 @@ export default function BestSellersSection() {
           },
         ],
         total: item.price,
+        packagingFee: SUGO_PACKAGING_FEE,
       });
     }
   };

@@ -19,6 +19,7 @@ export interface DeliveryOrderPayload {
     quantity: number;
   }>;
   total: number;
+  packagingFee?: number;
   customerName?: string;
   customerPhone?: string;
   customerAddress?: string;

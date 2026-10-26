@@ -33,6 +33,9 @@ export const DELIVERY_PARTNERS: DeliveryPartner[] = [
   },
 ];
 
+// Add-on cost for SUGO / delivery packaging container to put the food securely for delivery
+export const SUGO_PACKAGING_FEE = 5;
+
 export const STORE_BRANCHES: BranchInfo[] = [
   {
     id: "san-jose",

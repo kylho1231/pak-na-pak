@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useCart, DeliveryLiveLocation } from "@/context/CartContext";
-import { STORE_INFO } from "@/data/storeData";
+import { STORE_INFO, SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 export default function OrderDrawer() {
   const {
@@ -51,6 +51,10 @@ export default function OrderDrawer() {
   const [drawerGps, setDrawerGps] = useState<DeliveryLiveLocation | null>(null);
   const [isLocating, setIsLocating] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
+
+  // SUGO delivery packaging cost
+  const sugoPackagingCost = orderType === "delivery" ? SUGO_PACKAGING_FEE : 0;
+  const drawerTotal = cartTotal + sugoPackagingCost;
 
   if (!isCartOpen) return null;
 
@@ -192,7 +196,11 @@ export default function OrderDrawer() {
       msg += `• ${item.quantity}x ${item.name}${details} - ₱${item.price * item.quantity}\n`;
     });
 
-    msg += `\n💰 TOTAL ESTIMATED AMOUNT: ₱${cartTotal}\n`;
+    if (orderType === "delivery") {
+      msg += `• 🥡 1x SUGO Delivery Food Container - ₱${SUGO_PACKAGING_FEE} (Pang-lagay ng pagkain sa delivery)\n`;
+    }
+
+    msg += `\n💰 TOTAL ESTIMATED AMOUNT: ₱${drawerTotal}\n`;
     msg += `\nPaki-confirm po if available and ready for prep. Maraming salamat!`;
 
     return msg;
@@ -239,6 +247,7 @@ export default function OrderDrawer() {
         quantity: c.quantity,
       })),
       total: cartTotal,
+      packagingFee: SUGO_PACKAGING_FEE,
       customerName,
       customerPhone,
       customerAddress,
@@ -431,6 +440,25 @@ export default function OrderDrawer() {
                   ))}
                 </div>
 
+                {/* SUGO Packaging Fee in Delivery Mode */}
+                {orderType === "delivery" && (
+                  <div className="p-2.5 bg-amber-50/90 border border-amber-200 rounded-xl flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-amber-200 flex items-center justify-center text-sm shrink-0">
+                        🥡
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-black text-pak-black">SUGO Food Packaging Container</span>
+                          <span className="text-[10px] bg-pak-yellow text-pak-black font-extrabold px-1.5 py-0.2 rounded">Add-on</span>
+                        </div>
+                        <p className="text-[10px] text-zinc-600">Puts your food securely in takeout boxes for delivery</p>
+                      </div>
+                    </div>
+                    <span className="font-display font-black text-xs text-amber-950 shrink-0">+₱{SUGO_PACKAGING_FEE}</span>
+                  </div>
+                )}
+
                 {/* GPS Location Detection in Delivery Mode */}
                 {orderType === "delivery" && (
                   <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl space-y-2">
@@ -572,12 +600,18 @@ export default function OrderDrawer() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-xs text-zinc-500 font-semibold block">Total Amount</span>
-                  <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
-                    <Sparkles className="w-3 h-3" /> Sulit guaranteed
-                  </span>
+                  {orderType === "delivery" ? (
+                    <span className="text-[11px] text-zinc-600 font-medium">
+                      Food ₱{cartTotal} + ₱{SUGO_PACKAGING_FEE} SUGO box
+                    </span>
+                  ) : (
+                    <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" /> Sulit guaranteed
+                    </span>
+                  )}
                 </div>
                 <span className="font-display font-black text-2xl sm:text-3xl text-pak-black">
-                  ₱{cartTotal}
+                  ₱{drawerTotal}
                 </span>
               </div>
 

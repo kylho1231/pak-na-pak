@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useCart, DeliveryLiveLocation } from "@/context/CartContext";
-import { DELIVERY_PARTNERS, STORE_INFO } from "@/data/storeData";
+import { DELIVERY_PARTNERS, STORE_INFO, SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 const POPULAR_ANTIQUE_LANDMARKS = [
   "EBJ Freedom Park, San Jose",
@@ -44,6 +44,14 @@ export default function DeliveryRidersModal() {
   const [liveLocation, setLiveLocation] = useState<DeliveryLiveLocation | null>(null);
   const [isLocating, setIsLocating] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
+
+  // SUGO delivery packaging container fee
+  const sugoFee =
+    deliveryPayload?.packagingFee !== undefined
+      ? deliveryPayload.packagingFee
+      : SUGO_PACKAGING_FEE;
+  const foodTotal = deliveryPayload?.total ?? 0;
+  const totalAmountToPayAtStore = foodTotal > 0 ? foodTotal + sugoFee : 0;
 
   // Sync payload if passed from Order Drawer
   useEffect(() => {
@@ -188,9 +196,12 @@ export default function DeliveryRidersModal() {
           item.details ? ` [${item.details}]` : ""
         } - ₱${item.price * item.quantity}\n`;
       });
-      msg += `\n💰 ESTIMATED FOOD COST: ₱${deliveryPayload.total} (Excludes rider fee)\n\n`;
+      msg += `• 🥡 1x SUGO Delivery Food Container - ₱${sugoFee} (Pang-lagay ng pagkain para sa delivery)\n`;
+      msg += `\n💰 ESTIMATED AMOUNT TO PAY AT PAK NA PAK: ₱${totalAmountToPayAtStore} (Food: ₱${foodTotal} + ₱${sugoFee} SUGO container)\n`;
+      msg += `*(Note: Delivery fee is separate and paid directly to rider upon arrival)*\n\n`;
     } else {
-      msg += `📋 ITEM TO BUY: (Please refer to Pak na Pak menu)\n\n`;
+      msg += `📋 ITEM TO BUY: (Please refer to Pak na Pak menu)\n`;
+      msg += `• 🥡 1x SUGO Delivery Food Container - ₱${sugoFee} (Pang-lagay ng pagkain)\n\n`;
     }
 
     msg += `🏠 DELIVER TO (CUSTOMER LOCATION):\n`;
@@ -319,8 +330,8 @@ export default function DeliveryRidersModal() {
                   <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                   Items for Rider to Buy
                 </span>
-                <span className="font-display font-black text-base text-pak-black">
-                  Total: ₱{deliveryPayload.total}
+                <span className="text-xs font-bold text-zinc-500">
+                  Food Subtotal: ₱{foodTotal}
                 </span>
               </div>
 
@@ -344,15 +355,46 @@ export default function DeliveryRidersModal() {
                   </div>
                 ))}
               </div>
+
+              {/* SUGO Packaging Container Add-on */}
+              <div className="flex items-center justify-between text-xs bg-amber-50/90 -mx-1 px-3 py-2 rounded-xl border border-amber-200">
+                <div className="flex items-center gap-2">
+                  <span className="text-base">🥡</span>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-black text-amber-950">SUGO Food Packaging Container</span>
+                      <span className="text-[10px] bg-pak-yellow text-pak-black font-extrabold px-1.5 py-0.2 rounded">Add-on</span>
+                    </div>
+                    <span className="text-[10px] text-zinc-600 block">Puts food in secure takeout containers for delivery</span>
+                  </div>
+                </div>
+                <span className="font-black text-amber-950 font-display text-sm shrink-0">+₱{sugoFee}</span>
+              </div>
+
+              {/* Total to Pay at Store */}
+              <div className="border-t border-zinc-200 pt-2 flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] text-zinc-500 block">Estimated Amount to Pay at Store</span>
+                  <span className="text-[10px] text-emerald-700 font-semibold">(Food ₱{foodTotal} + ₱{sugoFee} SUGO container)</span>
+                </div>
+                <span className="font-display font-black text-xl text-pak-black">
+                  ₱{totalAmountToPayAtStore}
+                </span>
+              </div>
             </div>
           ) : (
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="w-8 h-8 rounded-xl bg-amber-200 flex items-center justify-center text-base shrink-0">
+                🥡
+              </div>
               <div>
-                <strong className="block font-bold">Have your craving ready?</strong>
-                <span>
-                  Turn on your GPS location below and choose your preferred delivery rider to contact on Facebook!
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <strong className="block font-bold text-amber-950">SUGO Delivery Container Add-on: ₱5</strong>
+                  <span className="text-[10px] bg-pak-yellow text-pak-black font-extrabold px-1.5 py-0.2 rounded">Add-on</span>
+                </div>
+                <p className="text-zinc-700 mt-0.5">
+                  Pak na Pak securely puts your order in clean takeout boxes for the delivery rider for only 5 pesos! Choose your rider below to dispatch.
+                </p>
               </div>
             </div>
           )}

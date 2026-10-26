@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Bike, Sparkles, Flame, Plus } from "lucide-react";
 import { MenuItem } from "@/types";
 import { useCart } from "@/context/CartContext";
+import { SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 interface MenuCardProps {
   item: MenuItem;
@@ -31,6 +32,7 @@ export default function MenuCard({ item }: MenuCardProps) {
           },
         ],
         total: item.price,
+        packagingFee: SUGO_PACKAGING_FEE,
       });
     }
   };
