@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Plus, Sparkles, Flame, Check } from "lucide-react";
+import { Bike, Sparkles, Flame, Plus } from "lucide-react";
 import { MenuItem } from "@/types";
 import { useCart } from "@/context/CartContext";
 
@@ -11,7 +11,7 @@ interface MenuCardProps {
 }
 
 export default function MenuCard({ item }: MenuCardProps) {
-  const { openCustomizer, addToCart } = useCart();
+  const { openCustomizer, openDeliveryModal } = useCart();
 
   const handleAction = () => {
     if (
@@ -21,7 +21,17 @@ export default function MenuCard({ item }: MenuCardProps) {
     ) {
       openCustomizer(item);
     } else {
-      addToCart(item);
+      openDeliveryModal({
+        items: [
+          {
+            name: item.name,
+            price: item.price,
+            quantity: 1,
+            details: item.portion,
+          },
+        ],
+        total: item.price,
+      });
     }
   };
 
@@ -124,13 +134,13 @@ export default function MenuCard({ item }: MenuCardProps) {
               : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
           }`}
         >
-          <Plus className="w-3.5 h-3.5 text-pak-yellow" />
+          <Bike className="w-3.5 h-3.5 text-pak-yellow" />
           <span>
             {item.inStock
               ? item.hasFlavorSelection || item.hasPastaSelection
-                ? "Select Flavors"
-                : "Add to Order"
-              : "Unavailable"}
+                ? "Select Flavors & Order via Rider"
+                : `Order via Delivery Rider • ₱${item.price}`
+              : "Unavailable Today"}
           </span>
         </button>
       </div>

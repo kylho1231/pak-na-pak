@@ -6,6 +6,7 @@ import { ArrowLeft, Sparkles, FileText, Phone, MessageCircle } from "lucide-reac
 import MenuSection from "@/components/menu/MenuSection";
 import FlavorsShowcase from "@/components/home/FlavorsShowcase";
 import SamgyupShowcase from "@/components/home/SamgyupShowcase";
+import DeliveryPartnersSection from "@/components/home/DeliveryPartnersSection";
 import ItemCustomizerModal from "@/components/menu/ItemCustomizerModal";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
@@ -61,6 +62,9 @@ export default function FullMenuPage() {
 
       {/* 12 Chicken Glazes Detail */}
       <FlavorsShowcase />
+
+      {/* Accredited Antique Delivery Couriers */}
+      <DeliveryPartnersSection />
 
       {/* Samgyupsal Detail */}
       <SamgyupShowcase />

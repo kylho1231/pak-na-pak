@@ -9,6 +9,7 @@ import StickyMobileBar from "@/components/layout/StickyMobileBar";
 import OrderDrawer from "@/components/order/OrderDrawer";
 import MenuScanModal from "@/components/menu/MenuScanModal";
 import AdminModal from "@/components/admin/AdminModal";
+import DeliveryRidersModal from "@/components/delivery/DeliveryRidersModal";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -76,6 +77,7 @@ export default function RootLayout({
             <Footer />
             <StickyMobileBar />
             <OrderDrawer />
+            <DeliveryRidersModal />
             <MenuScanModal />
             <AdminModal />
           </CartProvider>

@@ -3,17 +3,30 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { CartItem, MenuItem } from "@/types";
 
+export interface DeliveryOrderPayload {
+  items: Array<{
+    name: string;
+    details?: string;
+    price: number;
+    quantity: number;
+  }>;
+  total: number;
+}
+
 interface CartContextType {
   cart: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
-  addToCart: (item: MenuItem, customization?: {
-    flavor?: string;
-    pasta?: string;
-    sauce?: string;
-    instructions?: string;
-    quantity?: number;
-  }) => void;
+  addToCart: (
+    item: MenuItem,
+    customization?: {
+      flavor?: string;
+      pasta?: string;
+      sauce?: string;
+      instructions?: string;
+      quantity?: number;
+    }
+  ) => void;
   removeFromCart: (cartId: string) => void;
   updateQuantity: (cartId: string, delta: number) => void;
   clearCart: () => void;
@@ -29,6 +42,11 @@ interface CartContextType {
   openScanModal: (index?: number) => void;
   closeScanModal: () => void;
   setSelectedScanIndex: (index: number) => void;
+  // Delivery Riders modal
+  isDeliveryModalOpen: boolean;
+  deliveryPayload: DeliveryOrderPayload | null;
+  openDeliveryModal: (payload?: DeliveryOrderPayload) => void;
+  closeDeliveryModal: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -41,6 +59,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [customizingItem, setCustomizingItem] = useState<MenuItem | null>(null);
   const [isScanModalOpen, setIsScanModalOpen] = useState(false);
   const [selectedScanIndex, setSelectedScanIndex] = useState(0);
+
+  // Delivery Riders modal state
+  const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+  const [deliveryPayload, setDeliveryPayload] = useState<DeliveryOrderPayload | null>(null);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -150,6 +172,31 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsScanModalOpen(false);
   };
 
+  const openDeliveryModal = (payload?: DeliveryOrderPayload) => {
+    if (payload) {
+      setDeliveryPayload(payload);
+    } else if (cart.length > 0) {
+      setDeliveryPayload({
+        items: cart.map((c) => ({
+          name: c.name,
+          details: [c.selectedFlavor, c.selectedPasta, c.selectedSauce]
+            .filter(Boolean)
+            .join(", "),
+          price: c.price,
+          quantity: c.quantity,
+        })),
+        total: cartTotal,
+      });
+    } else {
+      setDeliveryPayload(null);
+    }
+    setIsDeliveryModalOpen(true);
+  };
+
+  const closeDeliveryModal = () => {
+    setIsDeliveryModalOpen(false);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -170,6 +217,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         openScanModal,
         closeScanModal,
         setSelectedScanIndex,
+        isDeliveryModalOpen,
+        deliveryPayload,
+        openDeliveryModal,
+        closeDeliveryModal,
       }}
     >
       {children}

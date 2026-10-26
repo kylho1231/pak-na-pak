@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Plus, Minus, Check, Flame, ShoppingBag, Sparkles } from "lucide-react";
+import { X, Plus, Minus, Check, Flame, Bike, ShoppingBag, Sparkles } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { CHICKEN_FLAVORS_LIST } from "@/data/storeData";
 import { ChickenFlavorName } from "@/types";
 
 export default function ItemCustomizerModal() {
-  const { customizingItem, closeCustomizer, addToCart } = useCart();
+  const { customizingItem, closeCustomizer, addToCart, openDeliveryModal } = useCart();
 
   const [selectedFlavor, setSelectedFlavor] = useState<ChickenFlavorName>("Garlic Parmesan");
   const [selectedPasta, setSelectedPasta] = useState<"Spaghetti" | "Carbonara">("Spaghetti");
@@ -31,6 +31,30 @@ export default function ItemCustomizerModal() {
   }, [customizingItem]);
 
   if (!customizingItem) return null;
+
+  const handleOrderViaRider = () => {
+    const details = [
+      customizingItem.hasFlavorSelection ? selectedFlavor : undefined,
+      customizingItem.hasPastaSelection ? selectedPasta : undefined,
+      customizingItem.sauceOptions ? selectedSauce : undefined,
+      instructions.trim() ? `Note: ${instructions.trim()}` : undefined,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    openDeliveryModal({
+      items: [
+        {
+          name: customizingItem.name,
+          details,
+          price: customizingItem.price,
+          quantity,
+        },
+      ],
+      total: customizingItem.price * quantity,
+    });
+    closeCustomizer();
+  };
 
   const handleAdd = () => {
     addToCart(customizingItem, {
@@ -265,15 +289,25 @@ export default function ItemCustomizerModal() {
             </button>
           </div>
 
-          {/* Submit Button */}
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-sm py-3 px-5 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Add to Order • ₱{totalPrice}</span>
-          </button>
+          {/* Submit Actions */}
+          <div className="flex-1 flex flex-col sm:flex-row items-center gap-2">
+            <button
+              type="button"
+              onClick={handleOrderViaRider}
+              className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+            >
+              <Bike className="w-4 h-4 stroke-[2.3]" />
+              <span>Order via Delivery Rider • ₱{totalPrice}</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleAdd}
+              className="w-full sm:w-auto text-[11px] font-bold text-zinc-600 hover:text-black hover:bg-zinc-100 py-2 sm:py-3 px-3 rounded-xl border border-zinc-200 transition-colors cursor-pointer"
+              title="Add to multi-item pabili list"
+            >
+              + Add to List
+            </button>
+          </div>
         </div>
       </div>
     </div>

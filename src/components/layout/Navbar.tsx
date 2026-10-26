@@ -13,6 +13,7 @@ import {
   Clock,
   MapPin,
   Flame,
+  Bike,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_INFO } from "@/data/storeData";
@@ -21,7 +22,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { cartCount, cartTotal, setIsCartOpen, openScanModal } = useCart();
+  const { cartCount, cartTotal, setIsCartOpen, openScanModal, openDeliveryModal } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +36,8 @@ export default function Navbar() {
     { label: "Home", href: "/" },
     { label: "Full Menu", href: "/#menu" },
     { label: "Best Sellers", href: "/#bestsellers" },
-    { label: "Unlimited Meals", href: "/#unlimited" },
+    { label: "Delivery Riders", href: "/#delivery" },
+    { label: "Unlimited", href: "/#unlimited" },
     { label: "Samgyupsal", href: "/#samgyup" },
     { label: "₱99 Promos", href: "/#promos" },
     { label: "About", href: "/#about" },
@@ -126,12 +128,22 @@ export default function Navbar() {
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Direct Delivery Riders Contact */}
+            <button
+              onClick={() => openDeliveryModal()}
+              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              aria-label="Contact Antique Delivery Riders"
+            >
+              <Bike className="w-4 h-4 text-pak-yellow stroke-[2.2]" />
+              <span>Delivery Riders</span>
+            </button>
+
             {/* Quick Messenger Link */}
             <a
               href={STORE_INFO.messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
+              className="hidden md:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors cursor-pointer border border-zinc-700 hover:border-pak-yellow focus:outline-none focus:ring-2 focus:ring-pak-yellow"
               aria-label="Chat on Facebook Messenger"
             >
               <MessageCircle className="w-4 h-4 text-pak-yellow" />

@@ -13,12 +13,13 @@ import {
   Clock,
   Star,
   ShieldCheck,
+  Bike,
 } from "lucide-react";
-import { STORE_INFO } from "@/data/storeData";
+import { STORE_INFO, DELIVERY_PARTNERS } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
 
 export default function HeroSection() {
-  const { openScanModal, addToCart } = useCart();
+  const { openScanModal, addToCart, openDeliveryModal } = useCart();
 
   return (
     <section className="relative bg-pak-black text-white overflow-hidden pt-8 pb-16 lg:py-20 border-b border-zinc-800">
@@ -78,15 +79,14 @@ export default function HeroSection() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
 
-              <a
-                href={STORE_INFO.messengerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => openDeliveryModal()}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold text-base px-6 py-4 rounded-2xl border border-zinc-700 hover:border-pak-yellow transition-all duration-150 cursor-pointer"
               >
-                <MessageCircle className="w-5 h-5 text-pak-yellow" />
-                <span>Order via Messenger</span>
-              </a>
+                <Bike className="w-5 h-5 text-pak-yellow stroke-[2.3]" />
+                <span>Order via Delivery Riders</span>
+              </button>
 
               <button
                 type="button"

@@ -123,6 +123,17 @@ export interface PromoBanner {
   bgColor: string;
 }
 
+export interface DeliveryPartner {
+  id: string;
+  name: string;
+  tagline: string;
+  facebookUrl: string;
+  messengerUrl?: string;
+  badge: string;
+  serviceType: string;
+  color: string;
+}
+
 export interface ReservationFormData {
   fullName: string;
   contactNumber: string;

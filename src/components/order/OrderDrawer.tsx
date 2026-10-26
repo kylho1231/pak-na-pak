@@ -15,10 +15,11 @@ import {
   MapPin,
   User,
   Sparkles,
+  Bike,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useCart } from "@/context/CartContext";
-import { STORE_INFO } from "@/data/storeData";
+import { STORE_INFO, DELIVERY_PARTNERS } from "@/data/storeData";
 
 export default function OrderDrawer() {
   const {
@@ -30,6 +31,7 @@ export default function OrderDrawer() {
     clearCart,
     cartTotal,
     cartCount,
+    openDeliveryModal,
   } = useCart();
 
   const [orderType, setOrderType] = useState<"dine-in" | "take-out" | "delivery">("dine-in");
@@ -357,14 +359,27 @@ export default function OrderDrawer() {
                 </span>
               </div>
 
-              {/* Primary Messenger Order Button */}
+              {/* Primary Delivery Rider Booking Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCartOpen(false);
+                  openDeliveryModal();
+                }}
+                className="w-full flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-xs sm:text-sm py-3.5 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+              >
+                <Bike className="w-5 h-5 stroke-[2.3]" />
+                <span>Contact Delivery Riders (Mr. Cartman, SUGO, ErrandPro)</span>
+              </button>
+
+              {/* Secondary Store Messenger Button */}
               <button
                 type="button"
                 onClick={handleMessengerOrder}
-                className="w-full flex items-center justify-center gap-2 bg-pak-yellow hover:bg-pak-yellow-hover text-pak-black font-extrabold text-sm py-3.5 px-4 rounded-xl shadow-lg transition-transform active:scale-98 cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-zinc-700 transition-colors cursor-pointer"
               >
-                <MessageCircle className="w-5 h-5 fill-pak-black" />
-                <span>Send Order via Facebook Messenger</span>
+                <MessageCircle className="w-4 h-4 text-pak-yellow" />
+                <span>Or Message Pak na Pak Store Directly</span>
               </button>
 
               {/* Secondary Actions */}

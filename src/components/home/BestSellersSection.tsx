@@ -3,14 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, Plus, Sparkles, Star, ArrowRight } from "lucide-react";
+import { Flame, Bike, Sparkles, Star, ArrowRight } from "lucide-react";
 import { useAdmin } from "@/context/AdminContext";
 import { useCart } from "@/context/CartContext";
 import { MenuItem } from "@/types";
 
 export default function BestSellersSection() {
   const { menuItems } = useAdmin();
-  const { openCustomizer, addToCart } = useCart();
+  const { openCustomizer, openDeliveryModal } = useCart();
 
   // Get best sellers
   const bestSellers = menuItems.filter((item) => item.isBestSeller).slice(0, 6);
@@ -23,7 +23,17 @@ export default function BestSellersSection() {
     ) {
       openCustomizer(item);
     } else {
-      addToCart(item);
+      openDeliveryModal({
+        items: [
+          {
+            name: item.name,
+            price: item.price,
+            quantity: 1,
+            details: item.portion,
+          },
+        ],
+        total: item.price,
+      });
     }
   };
 
@@ -129,12 +139,12 @@ export default function BestSellersSection() {
                       : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
                   }`}
                 >
-                  <Plus className="w-4 h-4 text-pak-yellow" />
+                  <Bike className="w-4 h-4 text-pak-yellow" />
                   <span>
                     {item.inStock
                       ? item.hasFlavorSelection || item.hasPastaSelection
-                        ? "Customize & Add to Order"
-                        : `Add to Bag • ₱${item.price}`
+                        ? "Select Glaze & Order via Rider"
+                        : `Order via Delivery Rider • ₱${item.price}`
                       : "Sold Out Today"}
                   </span>
                 </button>

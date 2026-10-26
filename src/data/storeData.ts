@@ -1,4 +1,37 @@
-import { StoreInfo, CategoryInfo, ChickenFlavorDetail, SamgyupSetDetail, PromoBanner } from "@/types";
+import { StoreInfo, CategoryInfo, ChickenFlavorDetail, SamgyupSetDetail, PromoBanner, DeliveryPartner } from "@/types";
+
+export const DELIVERY_PARTNERS: DeliveryPartner[] = [
+  {
+    id: "cartman",
+    name: "Mr. Cartman Antique",
+    tagline: "Online Rider & Pabili Service in San Jose, Antique",
+    facebookUrl: "https://www.facebook.com/OnlineRiderAntique/",
+    messengerUrl: "https://m.me/OnlineRiderAntique",
+    badge: "Popular Antique Courier",
+    serviceType: "Fast Food Delivery & Pabili",
+    color: "#E11D48",
+  },
+  {
+    id: "sugo",
+    name: "SUGO Express",
+    tagline: "On-demand food delivery & rider errands in Antique",
+    facebookUrl: "https://www.facebook.com/p/SUGO-Express-61572859325227/",
+    messengerUrl: "https://www.facebook.com/p/SUGO-Express-61572859325227/",
+    badge: "Express Pabili Rider",
+    serviceType: "Door-to-Door Delivery",
+    color: "#2563EB",
+  },
+  {
+    id: "errandpro",
+    name: "ErrandPro Antique",
+    tagline: "Professional errands, pickup, and food pabili services",
+    facebookUrl: "https://www.facebook.com/p/ErrandPro-Antique-61576594030994/",
+    messengerUrl: "https://www.facebook.com/p/ErrandPro-Antique-61576594030994/",
+    badge: "Trusted Errand Partner",
+    serviceType: "Reliable Food Pabili",
+    color: "#059669",
+  },
+];
 
 export const STORE_INFO: StoreInfo = {
   name: "Pak na Pak",
