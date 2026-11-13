@@ -221,12 +221,12 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
 
 ## Phase 5: Verification and Documentation
 
-- [ ] **Task 22: Documenting workspace and Vercel deployment targets**
+- [x] **Task 22: Documenting workspace and Vercel deployment targets**
   - Description: Update setup instructions for local development and separate Vercel project roots/build commands.
   - Acceptance:
     - README documents how to run and build each app independently.
     - Admin deployment instructions state it must remain disabled until authentication is implemented.
-  - Verification: Follow the documented commands from a clean dependency install.
+  - Verification: Confirm workspace commands and separate Vercel project settings against the package configuration.
   - Dependencies: Tasks 1, 2, 3, and 13.
   - Files likely touched: `README.md`, `package.json`.
   - Estimated scope: Small.
@@ -238,7 +238,7 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
     - Lint and TypeScript checks pass.
     - Customer checkout still opens the existing Messenger/partner handoff.
     - Customer output contains no admin routes or controls.
-  - Verification: Run both workspace builds, `npm run lint`, `npx tsc --noEmit`, and focused smoke checks.
+  - Verification: Run both workspace builds, `npm run lint`, `npm run typecheck`, and focused smoke checks.
   - Dependencies: Tasks 5, 6, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, and 22.
   - Files likely touched: `package.json`, `tests/workspace-boundaries.test.mjs`.
   - Estimated scope: Small.

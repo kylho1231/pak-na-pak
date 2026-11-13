@@ -28,7 +28,7 @@ Pak na Pak is Antique's destination for crispy fried chicken with 12 signature g
 - **💬 1-Click Facebook Messenger Order Bridge:** Generates an automated, pre-formatted order summary ready to send straight to the restaurant's Facebook Messenger.
 - **📸 Original Physical Menu Scans Viewer:** High-resolution zoomable gallery showcasing the real printed menu cards.
 - **📅 Table Reservation & Inquiry Form:** Advance bookings for barkadas, birthdays, and family dinners.
-- **🔐 Phase 2 Store Manager / Menu Editor:** In-app manager modal with passcode unlock (`PIN: pak` or `1234`) to edit prices, toggle stock, and highlight best sellers.
+- **🛠️ Admin dashboard:** Isolated in `apps/admin` for local development only. Do not deploy it until the separate admin-access module replaces the demo PIN/localStorage authentication.
 - **📱 Mobile-First Sticky Action Bar:** Persistent quick-access bar with 44px+ touch targets for calling, menu navigation, and cart checkout.
 
 ---
@@ -48,8 +48,8 @@ Pak na Pak is Antique's destination for crispy fried chicken with 12 signature g
 
 ### Prerequisites
 
-- Node.js 18.18+ (tested on Node 20 & 24)
-- npm or pnpm
+- Node.js 20.9+ (required by the installed Next.js version)
+- npm
 
 ### Installation
 
@@ -63,18 +63,51 @@ cd pak-na-pak
 # Install dependencies
 npm install
 
-# Start development server
+# Start the customer app
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production Build
+### Workspace commands
 
 ```bash
-npm run build
-npm run start
+# Customer app
+npm run dev:customer
+npm run build:customer
+npm run start:customer
+
+# Admin app (local development only; do not deploy yet)
+npm run dev:admin
+npm run build:admin
+npm run start:admin
 ```
+
+The customer and admin apps are separate Next.js workspaces. Shared menu data and contracts live in `packages/shared`. Each app can also be run directly with npm's `--workspace` option, for example `npm run build --workspace @pak-na-pak/admin`.
+
+### Vercel projects
+
+Configure each app as a separate Vercel project connected to this repository. Vercel's monorepo support uses the repository's npm workspace definition and root lockfile.
+
+| App | Root Directory | Build Command | Deployment status |
+| --- | --- | --- | --- |
+| Customer | `apps/customer` | `npm run build` | Ready for a separate customer project |
+| Admin | `apps/admin` | `npm run build` | **Keep disabled. Do not create or enable a public deployment until secure admin authentication is implemented and the `admin-access` module is approved.** |
+
+Keep the Vercel install command auto-detected from the root `package-lock.json`; do not use a filtered install that omits `@pak-na-pak/shared`. Leave the output-directory setting at its Next.js default.
+
+See Vercel's [monorepo deployment guide](https://vercel.com/docs/monorepos) and [Root Directory build setting](https://vercel.com/docs/builds/configure-a-build#root-directory).
+
+### Workspace and route-boundary check
+
+After building both workspaces, run the focused production-boundary check:
+
+```bash
+npm run typecheck
+npm run test:workspace
+```
+
+It verifies the generated route manifests keep the dashboard out of the customer app and that the existing Messenger handoff remains wired.
 
 ---
 
