@@ -211,7 +211,7 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files likely touched: `samgyupsal-wrap.jpg`, `shanghai-chao-fan.jpg`, `siomai-chao-fan.jpg`, `sizzling-sisig.jpg`, `unli-pak-plate.jpg`.
   - Estimated scope: Medium.
 
-- [ ] **Task 21: Moving printed menu scans**
+- [x] **Task 21: Moving printed menu scans**
   - Description: Move the scanned menu images under the customer app's static asset root while preserving their URLs.
   - Acceptance: All five scan URLs resolve in the customer deployment.
   - Verification: Open each scan in the local menu viewer.
