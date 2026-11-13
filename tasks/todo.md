@@ -81,14 +81,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files moved: `apps/customer/src/components/home/HeroSection.tsx`, `apps/customer/src/components/home/BestSellersSection.tsx`, `apps/customer/src/components/home/FlavorsShowcase.tsx`, `apps/customer/src/components/home/SamgyupShowcase.tsx`.
   - Estimated scope: Medium.
 
-- [ ] **Task 8: Moving home page sections, group two**
+- [x] **Task 8: Moving home page sections, group two**
   - Description: Move the promo, about, location, and delivery partner sections.
   - Acceptance:
     - The customer homepage renders all four sections in the current order.
     - Links, reservation entry points, and delivery partner entry points remain available.
   - Verification: Build the customer workspace and smoke-test section anchors and actions.
   - Dependencies: Tasks 3 and 4.
-  - Files likely touched: `PromoSection.tsx`, `AboutSection.tsx`, `LocationSection.tsx`, `DeliveryPartnersSection.tsx`.
+  - Files moved: `apps/customer/src/components/home/PromoSection.tsx`, `apps/customer/src/components/home/AboutSection.tsx`, `apps/customer/src/components/home/LocationSection.tsx`, `apps/customer/src/components/home/DeliveryPartnersSection.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 9: Moving customer navigation and menu components**
