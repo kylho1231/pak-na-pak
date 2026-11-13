@@ -101,14 +101,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files touched: `apps/customer/src/components/layout/Navbar.tsx`, `apps/customer/src/components/layout/Footer.tsx`, `apps/customer/src/components/layout/StickyMobileBar.tsx`, `apps/customer/src/components/menu/MenuCard.tsx`, `apps/customer/src/components/menu/MenuSection.tsx`, `apps/customer/src/components/home/BestSellersSection.tsx`, `apps/customer/src/components/home/FlavorsShowcase.tsx`.
   - Estimated scope: Medium.
 
-- [ ] **Task 10: Moving cart and item customization**
+- [x] **Task 10: Moving cart and item customization**
   - Description: Move the cart context, order drawer, and item customization flow.
   - Acceptance:
     - Cart totals and item customization continue to work.
     - Messenger checkout handoff remains unchanged.
   - Verification: Smoke-test add, update, remove, and checkout actions.
   - Dependencies: Tasks 3, 4, and 9.
-  - Files likely touched: `CartContext.tsx`, `OrderDrawer.tsx`, `ItemCustomizerModal.tsx`.
+  - Files moved: `apps/customer/src/context/CartContext.tsx`, `apps/customer/src/components/order/OrderDrawer.tsx`, `apps/customer/src/components/menu/ItemCustomizerModal.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 11: Moving delivery, reservation, and menu-scan flows**
