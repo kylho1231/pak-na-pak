@@ -51,14 +51,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files touched: `package.json`, `package-lock.json`, `apps/customer/package.json`, `apps/admin/package.json`, `src/data/menuData.ts`, `src/data/storeData.ts`, `src/types/index.ts`, `packages/shared/package.json`, `packages/shared/src/`.
   - Estimated scope: Medium.
 
-- [ ] **Task 5: Moving customer secondary routes**
+- [x] **Task 5: Moving customer secondary routes**
   - Description: Move the menu, robots, and sitemap routes into the customer app.
   - Acceptance:
     - Existing customer URLs remain available at the same paths.
     - Metadata and sitemap entries do not expose admin routes.
   - Verification: Build the customer workspace and request each route locally.
   - Dependencies: Tasks 3 and 4.
-  - Files likely touched: `src/app/menu/page.tsx`, `src/app/robots.ts`, `src/app/sitemap.ts`, corresponding customer app routes.
+  - Files touched: `apps/customer/src/app/menu/page.tsx`, `apps/customer/src/app/robots.ts`, `apps/customer/src/app/sitemap.ts` (moved from `src/app`).
   - Estimated scope: Medium.
 
 - [ ] **Task 6: Moving customer menu and analytics APIs**
