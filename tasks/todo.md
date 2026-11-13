@@ -76,9 +76,9 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Acceptance:
     - The customer homepage renders all four sections.
     - Existing interactions and image paths continue to work.
-  - Verification: Build the customer workspace and smoke-test the homepage at desktop and mobile widths.
+  - Verification: Build and verify the four sections at desktop and mobile widths; recheck image URLs after asset tasks 16-20.
   - Dependencies: Tasks 3 and 4.
-  - Files likely touched: `HeroSection.tsx`, `BestSellersSection.tsx`, `FlavorsShowcase.tsx`, `SamgyupShowcase.tsx`.
+  - Files moved: `apps/customer/src/components/home/HeroSection.tsx`, `apps/customer/src/components/home/BestSellersSection.tsx`, `apps/customer/src/components/home/FlavorsShowcase.tsx`, `apps/customer/src/components/home/SamgyupShowcase.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 8: Moving home page sections, group two**
