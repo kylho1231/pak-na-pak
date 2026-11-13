@@ -11,15 +11,14 @@ import {
   SlidersHorizontal,
   X,
 } from "lucide-react";
-import { MENU_CATEGORIES } from "@/data/storeData";
-import { MenuCategoryId, MenuItem } from "@/types";
-import { useAdmin } from "@/context/AdminContext";
+import { MENU_CATEGORIES, MENU_ITEMS } from "@pak-na-pak/shared";
+import type { MenuCategoryId, MenuItem } from "@pak-na-pak/shared";
 import { useCart } from "@/context/CartContext";
 import MenuCard from "./MenuCard";
 
 export default function MenuSection() {
-  const { menuItems } = useAdmin();
   const { openScanModal } = useCart();
+  const menuItems = MENU_ITEMS;
 
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>("all");
   const [searchQuery, setSearchQuery] = useState("");

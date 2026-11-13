@@ -4,17 +4,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Flame, Bike, Sparkles, Star, ArrowRight } from "lucide-react";
-import { useAdmin } from "@/context/AdminContext";
+import { MENU_ITEMS } from "@pak-na-pak/shared";
+import type { MenuItem } from "@pak-na-pak/shared";
 import { useCart } from "@/context/CartContext";
-import { MenuItem } from "@/types";
 import { SUGO_PACKAGING_FEE } from "@/data/storeData";
 
 export default function BestSellersSection() {
-  const { menuItems } = useAdmin();
   const { openCustomizer, openDeliveryModal } = useCart();
 
   // Get best sellers
-  const bestSellers = menuItems.filter((item) => item.isBestSeller).slice(0, 6);
+  const bestSellers = MENU_ITEMS.filter((item) => item.isBestSeller).slice(0, 6);
 
   const handleItemClick = (item: MenuItem) => {
     if (

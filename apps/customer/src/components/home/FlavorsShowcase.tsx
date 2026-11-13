@@ -2,13 +2,12 @@
 
 import React, { useState } from "react";
 import { Flame, Sparkles, Star, Check, Utensils } from "lucide-react";
+import { MENU_ITEMS } from "@pak-na-pak/shared";
 import { CHICKEN_FLAVORS_LIST } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
-import { useAdmin } from "@/context/AdminContext";
 
 export default function FlavorsShowcase() {
   const [selectedFlavorId, setSelectedFlavorId] = useState("garlic-parm");
-  const { menuItems } = useAdmin();
   const { openCustomizer } = useCart();
 
   const currentFlavor =
@@ -16,7 +15,7 @@ export default function FlavorsShowcase() {
 
   const handleOrderWithFlavor = () => {
     // Find Pak Meal or 10pcs bundle to customize
-    const pakMeal = menuItems.find((m) => m.id === "pak-meal") || menuItems[0];
+    const pakMeal = MENU_ITEMS.find((m) => m.id === "pak-meal") || MENU_ITEMS[0];
     openCustomizer(pakMeal);
   };
 

@@ -91,14 +91,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files moved: `apps/customer/src/components/home/PromoSection.tsx`, `apps/customer/src/components/home/AboutSection.tsx`, `apps/customer/src/components/home/LocationSection.tsx`, `apps/customer/src/components/home/DeliveryPartnersSection.tsx`.
   - Estimated scope: Medium.
 
-- [ ] **Task 9: Moving customer navigation and menu components**
+- [x] **Task 9: Moving customer navigation and menu components**
   - Description: Move the navbar, footer, sticky mobile bar, menu card, and menu section.
   - Acceptance:
     - Customer navigation and menu browsing work independently of admin state.
     - Keyboard and mobile interactions retain semantic controls.
   - Verification: Build the customer workspace and smoke-test menu navigation and category selection.
   - Dependencies: Tasks 3 and 4.
-  - Files likely touched: `Navbar.tsx`, `Footer.tsx`, `StickyMobileBar.tsx`, `MenuCard.tsx`, `MenuSection.tsx`.
+  - Files touched: `apps/customer/src/components/layout/Navbar.tsx`, `apps/customer/src/components/layout/Footer.tsx`, `apps/customer/src/components/layout/StickyMobileBar.tsx`, `apps/customer/src/components/menu/MenuCard.tsx`, `apps/customer/src/components/menu/MenuSection.tsx`, `apps/customer/src/components/home/BestSellersSection.tsx`, `apps/customer/src/components/home/FlavorsShowcase.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 10: Moving cart and item customization**
