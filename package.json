@@ -17,6 +17,8 @@
     "dev:admin": "npm run dev --workspace @pak-na-pak/admin",
     "build:admin": "npm run build --workspace @pak-na-pak/admin",
     "start:admin": "npm run start --workspace @pak-na-pak/admin",
+    "test:workspace": "node --test tests/workspace-boundaries.test.mjs",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint"
   },
   "devDependencies": {
