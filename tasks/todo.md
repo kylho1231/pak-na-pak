@@ -121,14 +121,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files moved: `apps/customer/src/components/delivery/DeliveryRidersModal.tsx`, `apps/customer/src/components/reservation/TableReservationModal.tsx`, `apps/customer/src/components/menu/MenuScanModal.tsx`.
   - Estimated scope: Medium.
 
-- [ ] **Task 12: Moving AI recommendation surfaces**
+- [x] **Task 12: Moving AI recommendation surfaces**
   - Description: Move the customer AI assistant and Gemini recommendation API/library to the customer app.
   - Acceptance:
     - The recommendation endpoint remains under the same customer URL.
     - Gemini credentials remain server-only.
   - Verification: Build the customer workspace and smoke-test endpoint validation and success responses.
   - Dependencies: Tasks 2, 4, and 9.
-  - Files likely touched: `PakAiAssistant.tsx`, `geminiRecommender.ts`, `src/app/api/v1/ai/recommend/route.ts`.
+  - Files moved: `apps/customer/src/components/ai/PakAiAssistant.tsx`, `apps/customer/src/lib/geminiRecommender.ts`, `apps/customer/src/app/api/v1/ai/recommend/route.ts`.
   - Estimated scope: Medium.
 
 ## Checkpoint: Customer App
