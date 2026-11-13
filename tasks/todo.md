@@ -31,14 +31,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
 
 ## Phase 2: Customer App Migration
 
-- [ ] **Task 3: Moving the customer app shell**
+- [x] **Task 3: Moving the customer app shell**
   - Description: Move the customer root layout, global styles, and home route into the customer app.
   - Acceptance:
     - Customer metadata, fonts, theme, and home route remain intact.
     - Customer layout does not mount admin UI.
   - Verification: Build the customer workspace and smoke-test `/`.
   - Dependencies: Task 2.
-  - Files likely touched: `package.json`, `src/app/layout.tsx`, `src/app/globals.css`, `src/app/page.tsx` (moved under `apps/customer/src/app`).
+  - Files touched: `package.json`, `apps/customer/tsconfig.json`, `apps/customer/src/app/layout.tsx`, `apps/customer/src/app/globals.css`, `apps/customer/src/app/page.tsx` (moved from `src/app`).
   - Estimated scope: Medium.
 
 - [ ] **Task 4: Extracting shared menu types and catalog data**

@@ -7,9 +7,9 @@
     "apps/admin"
   ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "npm run dev --workspace @pak-na-pak/customer",
+    "build": "npm run build --workspace @pak-na-pak/customer",
+    "start": "npm run start --workspace @pak-na-pak/customer",
     "dev:customer": "npm run dev --workspace @pak-na-pak/customer",
     "build:customer": "npm run build --workspace @pak-na-pak/customer",
     "start:customer": "npm run start --workspace @pak-na-pak/customer",
