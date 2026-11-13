@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import {
   Flame,
   Phone,
@@ -18,13 +17,7 @@ import { STORE_INFO } from "@/data/storeData";
 import { useCart } from "@/context/CartContext";
 
 export default function Footer() {
-  const pathname = usePathname();
   const { openScanModal } = useCart();
-
-  // Isolate Data App / Dashboard completely from public customer portal
-  if (pathname?.startsWith("/dashboard")) {
-    return null;
-  }
 
   return (
     <footer className="bg-pak-black text-zinc-300 border-t-4 border-pak-yellow pb-24 md:pb-0 w-full max-w-full overflow-hidden">

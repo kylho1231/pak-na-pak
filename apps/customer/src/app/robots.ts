@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard", "/dashboard/*", "/api/*"],
+        disallow: ["/api/*"],
       },
     ],
     sitemap: "https://pak-na-pak.vercel.app/sitemap.xml",

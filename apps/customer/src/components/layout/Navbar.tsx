@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import {
   ShoppingBag,
   Menu as MenuIcon,
@@ -22,7 +21,6 @@ import { STORE_INFO } from "@/data/storeData";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
   const { cartCount, cartTotal, setIsCartOpen, openScanModal, openDeliveryModal, openReservationModal } = useCart();
 
   useEffect(() => {
@@ -32,11 +30,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Isolate Data App / Dashboard completely from public customer portal
-  if (pathname?.startsWith("/dashboard")) {
-    return null;
-  }
 
   const navLinks = [
     { label: "Menu", href: "/#menu" },

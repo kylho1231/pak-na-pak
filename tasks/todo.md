@@ -150,14 +150,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files touched: `apps/admin/src/app/layout.tsx`, `apps/admin/src/app/globals.css`, `apps/admin/src/app/dashboard/page.tsx`, `apps/admin/src/app/dashboard/layout.tsx`, `apps/admin/src/components/admin/AdminModal.tsx`, `apps/admin/src/context/AdminContext.tsx`, `apps/customer/src/app/layout.tsx`.
   - Estimated scope: Medium.
 
-- [ ] **Task 14: Removing admin-only customer wiring**
+- [x] **Task 14: Removing admin-only customer wiring**
   - Description: Remove admin providers and dashboard-only navigation logic from customer runtime.
   - Acceptance:
     - Customer layout mounts only customer-facing providers and overlays.
     - No query-string, keyboard, or localStorage shortcut opens admin tools in the customer app.
   - Verification: Search customer output for admin controls and smoke-test customer navigation.
   - Dependencies: Task 13.
-  - Files likely touched: customer `layout.tsx`, customer `Navbar.tsx`.
+  - Files touched: `apps/customer/src/app/robots.ts`, `apps/customer/src/components/ai/PakAiAssistant.tsx`, `apps/customer/src/components/layout/Navbar.tsx`, `apps/customer/src/components/layout/Footer.tsx`, `apps/customer/src/components/layout/StickyMobileBar.tsx`.
   - Estimated scope: Small.
 
 ## Phase 4: Static Assets
