@@ -203,7 +203,7 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files likely touched: `porkchop-chao-fan.jpg`, `samgyup-feast-grill.jpg`, `samgyup-lettuce-wrap.jpg`, `samgyup-table-spread.jpg`.
   - Estimated scope: Medium.
 
-- [ ] **Task 20: Moving menu images, group five**
+- [x] **Task 20: Moving menu images, group five**
   - Description: Move the final dish image group into the customer app and make the same paths available to admin previews.
   - Acceptance: All listed paths resolve in both app deployments without changing image contents.
   - Verification: Request the image paths from both local apps.
