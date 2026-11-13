@@ -162,13 +162,13 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
 
 ## Phase 4: Static Assets
 
-- [ ] **Task 15: Moving customer app identity assets**
+- [x] **Task 15: Moving customer app identity assets**
   - Description: Move the customer favicon and app icons into the customer app's static asset root.
   - Acceptance:
     - Existing icon URLs resolve in the customer deployment.
   - Verification: Request each icon locally and inspect the rendered page metadata.
   - Dependencies: Task 3.
-  - Files likely touched: `apple-touch-icon.png`, `favicon.ico`, `icon.png`.
+  - Files touched: `apps/customer/src/app/favicon.ico`, `apps/customer/src/app/icon.png`, `apps/customer/src/app/apple-icon.png`, `apps/customer/public/apple-touch-icon.png`.
   - Estimated scope: Small.
 
 - [ ] **Task 16: Moving menu images, group one**
