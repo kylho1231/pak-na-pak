@@ -1,9 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { MenuItem, PromoBanner } from "@/types";
-import { INITIAL_MENU_ITEMS } from "@/data/menuData";
-import { PROMO_BANNERS } from "@/data/storeData";
+import { INITIAL_MENU_ITEMS, PROMO_BANNERS } from "@pak-na-pak/shared";
+import type { MenuItem, PromoBanner } from "@pak-na-pak/shared";
 
 interface AdminContextType {
   isAdminOpen: boolean;

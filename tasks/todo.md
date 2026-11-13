@@ -139,14 +139,15 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
 
 ## Phase 3: Admin App Boundary
 
-- [ ] **Task 13: Moving the admin dashboard surface**
+- [x] **Task 13: Moving the admin dashboard surface**
   - Description: Move the existing dashboard, admin modal, admin context, and admin app shell out of the customer app.
   - Acceptance:
     - Admin pages and controls are absent from the customer build.
     - The admin build is not enabled as a public deployment before `admin-access` is complete.
   - Verification: Build both apps and confirm customer routes do not include dashboard/admin controls.
   - Dependencies: Tasks 2 and 4.
-  - Files likely touched: `src/app/dashboard/page.tsx`, `src/app/dashboard/layout.tsx`, `AdminModal.tsx`, `AdminContext.tsx`, `apps/admin/src/app/layout.tsx`.
+  - Deployment gate: The admin workspace is buildable for local verification only. No Vercel project or deploy workflow is configured; do not deploy it until `admin-access` is complete.
+  - Files touched: `apps/admin/src/app/layout.tsx`, `apps/admin/src/app/globals.css`, `apps/admin/src/app/dashboard/page.tsx`, `apps/admin/src/app/dashboard/layout.tsx`, `apps/admin/src/components/admin/AdminModal.tsx`, `apps/admin/src/context/AdminContext.tsx`, `apps/customer/src/app/layout.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 14: Removing admin-only customer wiring**

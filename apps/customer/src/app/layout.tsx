@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
-import { AdminProvider } from "@/context/AdminContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StickyMobileBar from "@/components/layout/StickyMobileBar";
@@ -81,19 +80,17 @@ export default function RootLayout({
       className={`${montserrat.variable} ${plusJakarta.variable} scroll-smooth w-full max-w-full overflow-x-hidden`}
     >
       <body className="min-h-screen bg-pak-cream text-pak-black font-body antialiased flex flex-col selection:bg-pak-yellow selection:text-pak-black w-full max-w-full overflow-x-hidden relative">
-        <AdminProvider>
-          <CartProvider>
-            <Navbar />
-            <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
-            <Footer />
-            <StickyMobileBar />
-            <OrderDrawer />
-            <DeliveryRidersModal />
-            <TableReservationModal />
-            <MenuScanModal />
-            <PakAiAssistant />
-          </CartProvider>
-        </AdminProvider>
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
+          <Footer />
+          <StickyMobileBar />
+          <OrderDrawer />
+          <DeliveryRidersModal />
+          <TableReservationModal />
+          <MenuScanModal />
+          <PakAiAssistant />
+        </CartProvider>
       </body>
     </html>
   );
