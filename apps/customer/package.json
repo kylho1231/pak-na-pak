@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@pak-na-pak/shared": "0.1.0",
     "@google/genai": "^2.31.0",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",

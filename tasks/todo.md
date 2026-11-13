@@ -41,14 +41,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files touched: `package.json`, `apps/customer/tsconfig.json`, `apps/customer/src/app/layout.tsx`, `apps/customer/src/app/globals.css`, `apps/customer/src/app/page.tsx` (moved from `src/app`).
   - Estimated scope: Medium.
 
-- [ ] **Task 4: Extracting shared menu types and catalog data**
+- [x] **Task 4: Extracting shared menu types and catalog data**
   - Description: Put menu/store types and initial catalog data behind an explicit workspace package consumed by both apps.
   - Acceptance:
     - Both apps compile against the same menu and store contracts.
     - No app imports source files through a relative path into the other app.
   - Verification: Type-check both apps and compare the public menu response against the existing contract.
   - Dependencies: Task 1.
-  - Files likely touched: `package.json`, `package-lock.json`, `src/data/menuData.ts`, `src/data/storeData.ts`, `src/types/index.ts`, `packages/shared/package.json`.
+  - Files touched: `package.json`, `package-lock.json`, `apps/customer/package.json`, `apps/admin/package.json`, `src/data/menuData.ts`, `src/data/storeData.ts`, `src/types/index.ts`, `packages/shared/package.json`, `packages/shared/src/`.
   - Estimated scope: Medium.
 
 - [ ] **Task 5: Moving customer secondary routes**

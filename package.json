@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "apps/customer",
-    "apps/admin"
+    "apps/admin",
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm run dev --workspace @pak-na-pak/customer",

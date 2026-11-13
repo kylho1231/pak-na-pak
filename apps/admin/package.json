@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@pak-na-pak/shared": "0.1.0",
     "framer-motion": "^14.6.0",
     "lucide-react": "^1.61.0",
     "next": "16.4.3",
