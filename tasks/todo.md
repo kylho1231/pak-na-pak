@@ -239,6 +239,7 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
     - Customer checkout still opens the existing Messenger/partner handoff.
     - Customer output contains no admin routes or controls.
   - Verification: Run both workspace builds, `npm run lint`, `npm run typecheck`, and focused smoke checks.
+  - Current blocker: `npm run lint` still reports 13 pre-existing source errors and 73 warnings; generated `.next` output is now ignored.
   - Dependencies: Tasks 5, 6, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, and 22.
   - Files likely touched: `package.json`, `tests/workspace-boundaries.test.mjs`.
   - Estimated scope: Small.
