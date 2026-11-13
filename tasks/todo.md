@@ -14,14 +14,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files likely touched: `package.json`, `package-lock.json`, `apps/customer/package.json`, `apps/admin/package.json`.
   - Estimated scope: Medium.
 
-- [ ] **Task 2: Configuring independent Next.js app roots**
+- [x] **Task 2: Configuring independent Next.js app roots**
   - Description: Add app-specific Next.js and TypeScript configuration after checking the installed Next.js 16.4.3 workspace guidance.
   - Acceptance:
     - Each app resolves its own source and shared workspace packages.
     - Neither app relies on undocumented imports from the other app.
   - Verification: Run TypeScript checks for both workspace packages.
   - Dependencies: Task 1.
-  - Files likely touched: `apps/customer/next.config.ts`, `apps/customer/tsconfig.json`, `apps/admin/next.config.ts`, `apps/admin/tsconfig.json`.
+  - Files touched: `apps/customer/next.config.ts`, `apps/customer/tsconfig.json`, `apps/admin/next.config.ts`, `apps/admin/tsconfig.json`, `.gitignore`.
   - Estimated scope: Medium.
 
 ## Checkpoint: Workspace
