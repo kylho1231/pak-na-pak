@@ -116,9 +116,9 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Acceptance:
     - Delivery and reservation entry points remain available.
     - Menu scans load from customer routes.
-  - Verification: Smoke-test the three modal flows and their close/return actions.
+  - Verification: Smoke-test modal open/close actions; verify scan image URLs after asset task 21.
   - Dependencies: Tasks 3 and 9; cart context from Task 10.
-  - Files likely touched: `DeliveryRidersModal.tsx`, `TableReservationModal.tsx`, `MenuScanModal.tsx`.
+  - Files moved: `apps/customer/src/components/delivery/DeliveryRidersModal.tsx`, `apps/customer/src/components/reservation/TableReservationModal.tsx`, `apps/customer/src/components/menu/MenuScanModal.tsx`.
   - Estimated scope: Medium.
 
 - [ ] **Task 12: Moving AI recommendation surfaces**
