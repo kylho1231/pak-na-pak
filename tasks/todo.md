@@ -61,14 +61,14 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files touched: `apps/customer/src/app/menu/page.tsx`, `apps/customer/src/app/robots.ts`, `apps/customer/src/app/sitemap.ts` (moved from `src/app`).
   - Estimated scope: Medium.
 
-- [ ] **Task 6: Moving customer menu and analytics APIs**
+- [x] **Task 6: Moving customer menu and analytics APIs**
   - Description: Move the public menu and analytics API routes without changing their response contracts.
   - Acceptance:
     - Public menu filters and response shape are preserved.
     - No admin write operation is exposed by these public routes.
   - Verification: Build the customer workspace and smoke-test the existing GET endpoints.
   - Dependencies: Tasks 2 and 4.
-  - Files likely touched: `src/app/api/v1/menu/route.ts`, `src/app/api/v1/analytics/route.ts`, corresponding customer API routes.
+  - Files touched: `apps/customer/src/app/api/v1/menu/route.ts`, `apps/customer/src/app/api/v1/analytics/route.ts` (moved from `src/app`).
   - Estimated scope: Medium.
 
 - [ ] **Task 7: Moving home page sections, group one**
