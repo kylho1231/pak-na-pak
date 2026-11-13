@@ -195,7 +195,7 @@ This task list implements only the approved `platform-split` module in `SPEC-pla
   - Files likely touched: `loaded-cheesy-fries.jpg`, `pak-meal-3pcs.png`, `pasta-pak-plate.jpg`, `pork-pepper-rice.jpg`.
   - Estimated scope: Medium.
 
-- [ ] **Task 19: Moving menu images, group four**
+- [x] **Task 19: Moving menu images, group four**
   - Description: Move the next dish image group into the customer app and make the same paths available to admin previews.
   - Acceptance: All listed paths resolve in both app deployments without changing image contents.
   - Verification: Request the image paths from both local apps.
